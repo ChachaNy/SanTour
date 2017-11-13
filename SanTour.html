@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SanTour</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--[if lte IE 8]>
+    <!--<script src="assets/js/ie/html5shiv.js"></script><![endif]-->
+    <link rel="stylesheet" href="cssFiles/main.css">
+	<link rel="stylesheet" href="cssFiles/nouislider.min.css">
+    <!--[if lte IE 9]>
+    <!--<link rel="stylesheet" href="assets/css/ie9.css"/><![endif]-->
+
+    <style>
+        body {
+            font-family: Lucida Grande;
+			overflow:auto;
+        }
+
+        h3 {
+            text-decoration: underline;
+        }
+
+        #questionnaireID {
+			 width:50%;
+            margin-left:10px;
+            /*border: 1px solid black;*/
+        }
+
+        #resultatID {
+			position:fixed;
+			top: 0;
+			right: 0;
+            width: 50%;
+            /*border: 1px solid red;*/
+        }
+
+        #banner {
+            padding-left:20px;
+        }
+
+
+    </style>
+
+    <script src="scripts/jquery-3.1.1.min.js"></script>
+    <script src="scripts/highcharts.js"></script>
+    <script src="scripts/highcharts-more.js"></script>
+    <script src="scripts/exporting.js"></script>
+	<script src="scripts/nouislider.min.js"></script>
+	<script src="https://code.highcharts.com/highcharts.js"></script>
+	<script src="https://code.highcharts.com/highcharts-more.js"></script>
+	<script src="https://code.highcharts.com/modules/exporting.js"></script>
+
+</head>
+
+	<body onload="redraw(true)">
+
+		<div id="questionnaireID">
+			<!-- Banner -->
+			<section id="banner">
+				<div>
+					<section>
+						<h2>SanTour: recommendations adaptées à votre Profil</h2>
+
+						<p>Veuillez s'il vous plaît répondre aux questions suivantes.</p>
+
+					</section>
+				</div>
+			</section>
+
+			<!-- SANTE -->
+			<section id="sante">
+				<div class="inner split" style="margin-top:30px;">
+					<div>
+						<section>
+							<h2>Profil santé</h2>
+						</section>
+					</div>
+				</div>
+			</section>
+
+			<!-- One -->
+			<section id="a1" class="wrapper">
+				<div class="inner split">
+					<section>
+						<h3>Activité Physique</h3>
+						<div id="sec_ap1">
+							<h4>Est-ce que vous avez une activité physique régulière?</h4>
+							<input name="ap1" id="ap1_1" value="1" type="radio">
+							<label for="ap1_1">oui</label>
+							<input name="ap1" id="ap1_2" value="0" type="radio">
+							<label for="ap1_2">non</label>
+						</div>
+						<div id="sec_ap2" style="display: none;">
+							<h4>Diriez vous que vous êtes actif-ve au moins 30 minutes chaque jour (au moins 5 jours par
+								semaine)?</h4>
+							<input name="ap2" id="ap2_1" value="1" type="radio">
+							<label for="ap2_1">oui</label>
+							<input name="ap2" id="ap2_2" value="0" type="radio">
+							<label for="ap2_2">non</label>
+						</div>
+						<div id="sec_ap3" style="display: none;">
+							<h4>Est-ce qu'il vous arrive parfois/regulièrement de transpirer ou d'être essoufflé/e durant cette
+								activité?</h4>
+							<input name="ap3" id="ap3_1" value="1" type="radio">
+							<label for="ap3_1">oui</label>
+							<input name="ap3" id="ap3_2" value="0" type="radio">
+							<label for="ap3_2">non</label>
+						</div>
+						<div id="sec_ap4" style="display: none;">
+							<h4>Est-ce que vous auriez envie de reprendre une activité physique plus importante dans les
+								prochains mois?</h4>
+							<input name="ap4" id="ap4_1" value="1" type="radio">
+							<label for="ap4_1">oui</label>
+							<input name="ap4" id="ap4_2" value="0" type="radio">
+							<label for="ap4_2">non</label>
+						</div>
+						<div id="sec_ap5" style="display: none;">
+							<h4>Est-ce que vous connaisez les avantages que l'activité physique peut apporter pour la
+								santé?</h4>
+							<input name="ap5_1" id="ap5_1_1" value="1" type="radio">
+							<label for="ap5_1_1">oui</label>
+							<input name="ap5_1" id="ap5_1_2" value="0" type="radio">
+							<label for="ap5_1_2">non</label>
+
+							<h4>Est-ce que vous connaisez les risques de l'inactivité?</h4>
+							<input name="ap5_2" id="ap5_2_1" value="1" type="radio">
+							<label for="ap5_2_1">oui</label>
+							<input name="ap5_2" id="ap5_2_2" value="0" type="radio">
+							<label for="ap5_2_2">non</label>
+						</div>
+					</section>
+				</div>
+			</section>
+
+			<!-- MARCHER SANS AIDE-->
+			<section id="s1" class="wrapper">
+				<div class="inner split">
+					<section>
+						<h3>Marcher sans aides</h3>
+						<h4>Quels dispositifs d'aide à la marche utilisez vous?</h4>
+						<input name="q1" id="r1_1" value="5" type="radio">
+						<label for="r1_1">aucune</label>
+						<input name="q1" id="r1_2" value="4" type="radio">
+						<label for="r1_2">une canne</label>
+						<input name="q1" id="r1_3" value="3" type="radio">
+						<label for="r1_3">deux cannes</label>
+						<input name="q1" id="r1_4" value="2" type="radio">
+						<label for="r1_4">déambulateur</label>
+						<input name="q1" id="r1_5" value="1" type="radio">
+						<label for="r1_5">cadre de marche</label>
+						<input name="q1" id="r1_6" value="0" type="radio">
+						<label for="r1_6">j'ai besoin de l'aide d'une tierce personne</label>
+					</section>
+				</div>
+			</section>
+
+			<!-- VITESSE DE MARCHE-->
+			<section id="s2" class="wrapper">
+				<div class="inner split">
+					<section>
+						<h3>Vitesse Marche</h3>
+						<h4>Par rapport à la vitesse de marche moyenne (celle de vos proches), pensez vous marcher
+							habituellement ... </h4>
+						<input name="q2" id="r2_1" value="1" type="radio">
+						<label for="r2_1">nettement moins vite</label>
+						<input name="q2" id="r2_2" value="2" type="radio">
+						<label for="r2_2">un peu moins vite</label>
+						<input name="q2" id="r2_3" value="3" type="radio">
+						<label for="r2_3">à la même vitesse</label>
+						<input name="q2" id="r2_4" value="4" type="radio">
+						<label for="r2_4">un peu plus vite</label>
+						<input name="q2" id="r2_5" value="5" type="radio">
+						<label for="r2_5">nettement plus vite</label>
+					</section>
+				</div>
+			</section>
+
+
+			<!-- TEMPS DE MARCHE-->
+			<section id="s3" class="wrapper">
+				<div class="inner split">
+					<section>
+						<h3>Temps de Marche</h3>
+						<h4>Entourez le temps maximale que vous pensez pouvoir tenir sans vous arrêter pour vous reposer</h4>
+						<input name="q3" id="r3_1" value="0" type="radio">
+						<label for="r3_1">impossible</label>
+						<input name="q3" id="r3_2" value="1" type="radio">
+						<label for="r3_2">1 minute</label>
+						<input name="q3" id="r3_3" value="2" type="radio">
+						<label for="r3_3">5 minutes</label>
+						<input name="q3" id="r3_4" value="3" type="radio">
+						<label for="r3_4">15 minutes</label>
+						<input name="q3" id="r3_5" value="4" type="radio">
+						<label for="r3_5">30 minutes</label>
+						<input name="q3" id="r3_6" value="5" type="radio">
+						<label for="r3_6">1 heure</label>
+						<input name="q3" id="r3_7" value="6" type="radio">
+						<label for="r3_7">2 heures</label>
+						<input name="q3" id="r3_8" value="7" type="radio">
+						<label for="r3_8">3 heures et plus</label>
+						<ul class="actions">
+
+						</ul>
+					</section>
+				</div>
+			</section>
+
+			<!-- CAPACITE A MONTER-->
+			<section id="s4" class="wrapper">
+				<div class="inner split">
+					<section>
+						<h3>Capacité à monter</h3>
+						<h7>Reportez le degré de difficulté physique qui décrit le mieux la
+							difficulté que vous avez eue à monter des escaliers, sans vous arrêter
+							pour vous reposer, au cours de la dernière semaine
+						</h7>
+						<h4>Monter 1 étage</h4>
+						<input name="q4_1" id="r4_1_1" value="4" type="radio">
+						<label for="r4_1_1">aucun</label>
+						<input name="q4_1" id="r4_1_2" value="3" type="radio">
+						<label for="r4_1_2">léger</label>
+						<input name="q4_1" id="r4_1_3" value="2" type="radio">
+						<label for="r4_1_3">moyen</label>
+						<input name="q4_1" id="r4_1_4" value="1" type="radio">
+						<label for="r4_1_4">important</label>
+						<input name="q4_1" id="r4_1_5" value="0" type="radio">
+						<label for="r4_1_5">infaisable</label>
+
+						<div id="etage3">
+							<h4>Monter 3 étages</h4>
+							<input name="q4_2" id="r4_2_1" value="9" type="radio">
+							<label for="r4_2_1">aucun</label>
+							<input name="q4_2" id="r4_2_2" value="8" type="radio">
+							<label for="r4_2_2">léger</label>
+							<input name="q4_2" id="r4_2_3" value="7" type="radio">
+							<label for="r4_2_3">moyen</label>
+							<input name="q4_2" id="r4_2_4" value="6" type="radio">
+							<label for="r4_2_4">important</label>
+							<input name="q4_2" id="r4_2_5" value="5" type="radio">
+							<label for="r4_2_5">infaisable</label>
+						</div>
+
+						<div id="etage5">
+							<h4>Monter 5 étages</h4>
+							<input name="q4_3" id="r4_3_1" value="14" type="radio">
+							<label for="r4_3_1">aucun</label>
+							<input name="q4_3" id="r4_3_2" value="13" type="radio">
+							<label for="r4_3_2">léger</label>
+							<input name="q4_3" id="r4_3_3" value="12" type="radio">
+							<label for="r4_3_3">moyen</label>
+							<input name="q4_3" id="r4_3_4" value="11" type="radio">
+							<label for="r4_3_4">important</label>
+							<input name="q4_3" id="r4_3_5" value="10" type="radio">
+							<label for="r4_3_5">infaisable</label>
+						</div>
+					</section>
+				</div>
+			</section>
+
+
+			<!-- ASSURANCE A MARCHER-->
+			<section id="s8" class="wrapper">
+				<div class="inner split">
+					<section>
+						<h3>Assurance à marcher</h3>
+						<h4>Est-ce que vous avez peur de chuter?</h4>
+						<input name="q8_1" id="r8_1_1" value="0" type="radio">
+						<label for="r8_1_1">oui</label>
+						<input name="q8_1" id="r8_1_2" value="1" type="radio">
+						<label for="r8_1_2">non</label>
+
+						<h4>Avez vous chuté lors des 12 derniers mois?</h4>
+						<input name="q8_2" id="r8_2_1" value="3" type="radio">
+						<label for="r8_2_1">non</label>
+						<input name="q8_2" id="r8_2_2" value="2" type="radio">
+						<label for="r8_2_2">une fois</label>
+						<input name="q8_2" id="r8_2_3" value="1" type="radio">
+						<label for="r8_2_3">deux fois</label>
+						<input name="q8_2" id="r8_2_4" value="0" type="radio">
+						<label for="r8_2_4">plusieurs fois</label>
+
+						<h4>Avez vous parfois des vertiges?</h4>
+						<input name="q8_3" id="r8_3_1" value="0" type="radio">
+						<label for="r8_3_1">oui</label>
+						<input name="q8_3" id="r8_3_2" value="1" type="radio">
+						<label for="r8_3_2">non</label>
+					</section>
+				</div>
+			</section>
+
+			<!-- PEUR DU VIDE-->
+			<section id="s5" class="wrapper">
+				<div class="inner split">
+					<section>
+						<h3>Peur du vide</h3>
+						<h4>Avez vous peur de l'altitude (peur du vide)?</h4>
+						<input name="q5" id="r5_1" value="1" type="radio">
+						<label for="r5_1">oui</label>
+						<input name="q5" id="r5_2" value="0" type="radio">
+						<label for="r5_2">non</label>
+					</section>
+				</div>
+			</section>
+
+			<!-- EQUILIBRE-->
+			<section id="s9" class="wrapper">
+				<div class="inner split">
+					<section>
+						<h3>Equilibre</h3>
+						<h4>Est-ce que vous vous sentez sûr de vous lors que vous vous tenez debout sur une seule jambe sans
+							vous tenir à quelque chose?</h4>
+						<input name="q9" id="r9_2" value="2" type="radio">
+						<label for="r9_2">oui, je me sens sûr-e</label><input name="q9" id="r9_1" value="1" type="radio">
+						<label for="r9_1">non, je ne me sens pas sûr-e</label>
+						<input name="q9" id="r9_3" value="0" type="radio">
+						<label for="r9_3">impossible de faire sans me tenir</label>
+					</section>
+				</div>
+			</section>
+
+			<!-- DOULEURS-->
+			<section id="s6" class="wrapper">
+				<div class="inner split">
+					<section>
+						<h3>Douleurs</h3>
+						<h4>Avez vous des douleurs?</h4>
+						<input name="q6" id="r6_1" value="1" type="checkbox">
+						<label for="r6_1">Douleurs dans la hanche</label>
+						<input name="q6" id="r6_2" value="1" type="checkbox">
+						<label for="r6_2">Douleurs aux genoux</label>
+						<input name="q6" id="r6_3" value="1" type="checkbox">
+						<label for="r6_3">Douleurs aux pieds</label>
+						<input name="q6" id="r6_4" value="1" type="checkbox">
+						<label for="r6_4">Douleurs au dos</label>
+						<input name="q6" id="r6_5" value="1" type="checkbox">
+						<label for="r6_5">Douleurs ailleurs</label>
+						<input name="q6" id="r6_6" value="0" type="checkbox">
+						<label for="r6_6">Pas de douleurs</label>
+					</section>
+				</div>
+			</section>
+
+			<!-- MOBILITE-->
+			<section id="s7" class="wrapper">
+				<div class="inner split">
+					<section>
+						<h3>Mobilité articulaire</h3>
+						<h4>Avez vous des problèmes de mobilité dans une ou plusieurs des articulations suivantes?</h4>
+						<input name="q7" id="r7_1" value="1" type="checkbox">
+						<label for="r7_1">Mobilité réduite à la cheville</label>
+						<input name="q7" id="r7_2" value="1" type="checkbox">
+						<label for="r7_2">Mobilité réduite aux genoux</label>
+						<input name="q7" id="r7_3" value="1" type="checkbox">
+						<label for="r7_3">Hanche</label>
+						<!--<input name="q7" id="r7_4" value="1" type="checkbox">
+						<label for="r7_4">Hanche</label>  A VERIFIER AVEC ROGER-->
+						<input name="q7" id="r7_4" value="0" type="checkbox">
+						<label for="r7_4">Pas de problèmes de mobilité</label>
+					</section>
+				</div>
+			</section>
+
+			<!-- PREFERENCES -->
+			<section id="sante">
+				<div class="inner split" style="margin-top:30px;">
+					<div>
+						<section>
+							<h2>Préférences</h2>
+						</section>
+					</div>
+				</div>
+			</section>
+
+			<!-- OBSTACLES -->
+			<section id="s8" class="wrapper">
+				 <div class="inner split">
+					<section>
+						<h3>Les obstacles</h3>
+						<h4>Évaluer de -10 (vous détestez) à +10 (vous aimez).</h4>
+						<div>
+							<label style="display:inline-block; width:10%;" for="r8_1"> Racines: </label>
+							<div style="width:35%; display:inline-block;" id="r8_1" class="sliders"></div>
+						</div>
+						<div style="margin-top:30px;">
+							<label style="display:inline-block; width:10%;" for="r8_2"> Cailloux: </label>
+							<div style="width:35%; display:inline-block;" id="r8_2" class="sliders"></div>
+						</div>
+						<div style="margin-top:30px;">
+							<label style="display:inline-block; width:10%;" for="r8_3"> Cabossé: </label>
+							<div style="width:35%; display:inline-block;" id="r8_3" class="sliders"></div>
+						</div>
+					</section>
+				 </div>
+			</section>
+
+			<!-- TOPOLOGIE -->
+			<section id="s9" class="wrapper">
+				<div class="inner split">
+					<section>
+						<h3>La topologie</h3>
+						<h4>Évaluer de -10 (vous détestez) à +10 (vous aimez).</h4>
+						<div>
+							<label style="display:inline-block; width:10%;" for="r9_1"> Montées: </label>
+							<div style="width:35%; display:inline-block;" id="r9_1" class="sliders"></div>
+						</div>
+						<div style="margin-top:30px;">
+							<label style="display:inline-block; width:10%;" for="r9_2"> Descentes: </label>
+							<div style="width:35%; display:inline-block;" id="r9_2" class="sliders"></div>
+						</div>
+						<div style="margin-top:30px;">
+							<label style="display:inline-block; width:10%;" for="r9_3"> Plat: </label>
+							<div style="width:35%; display:inline-block;" id="r9_3" class="sliders"></div>
+						</div>
+					</section>
+				</div>
+			</section>
+
+			<!-- PEUR DU VIDE -->
+			<section id="s10" class="wrapper">
+				<div class="inner split">
+					<section>
+						<h3>Peur du vide</h3>
+						<h4>Évaluer de -10 (vous détestez) à +10 (vous aimez).</h4>
+						<div>
+							<label style="display:inline-block; width:10%;" for="r10_1"> Ponts: </label>
+							<div style="width:35%; display:inline-block;" id="r10_1" class="sliders"></div>
+						</div>
+						<div style="margin-top:30px;">
+							<label style="display:inline-block; width:10%;" for="r10_2"> Crètes: </label>
+							<div style="width:35%; display:inline-block;" id="r10_2" class="sliders"></div>
+						</div>
+					</section>
+				 </div>
+			</section>
+
+			<!-- DUREE -->
+			<section id="s11" class="wrapper">
+				 <div class="inner split">
+					<section>
+						<h3>Durée</h3>
+						<h4>Évaluer de -10 (vous détestez) à +10 (vous aimez).</h4>
+						<div>
+							<label style="display:inline-block; width:10%;" for="r8_1"> 1h: </label>
+							<div style="width:35%; display:inline-block;" id="r8_1" class="sliders"></div>
+						</div>
+						<div style="margin-top:30px;">
+							<label style="display:inline-block; width:10%;" for="r8_2"> 2h: </label>
+							<div style="width:35%; display:inline-block;" id="r8_2" class="sliders"></div>
+						</div>
+						<div style="margin-top:30px;">
+							<label style="display:inline-block; width:10%;" for="r8_3"> 3h et + : </label>
+							<div style="width:35%; display:inline-block;" id="r8_3" class="sliders"></div>
+						</div>
+					</section>
+				 </div>
+			</section>	
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer"">
+			<div class="copyright">
+				© HES-SO Valais-Wallis. All rights reserved. Images: <a href="http://unsplash.com/">Unsplash</a>. Design: <a
+					href="http://templated.co/">TEMPLATED</a>.
+			</div>
+		</footer>
+
+		<div id="resultatID">
+				<div id="radarID" style="min-width: 400px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+
+				<div id="radarPref" style="min-width: 400px; max-width: 600px; height: 400px; margin: 0 auto"></div>
+
+				<section id="recommendationsID" class="wrapper">
+					<div class="inner split">
+						<section>
+							<h2>Recommandations</h2>
+							<b>Durée de la route à proposer:</b>
+							<span id="rec1"></span><br>
+							<b>Vitesse de la marche:</b>
+							<span id="rec2"></span><br>
+							<b> Chemins:</b>
+							<span id="rec3"></span><br>
+							<b>Denivelé:</b>
+							<span id="rec4"></span><br>
+							<b>Risques de chute:</b>
+							<span id="rec5"></span><br>
+							<b>Brochures/infos/conseils:</b>
+							<span id="rec6"></span><br>
+						</section>
+					</div>
+				</section>
+		</div>
+
+
+		
+
+	</body>
+</html>
+
+<script type="text/javascript">
+
+	//Create sliders
+	var x = document.getElementsByClassName("sliders");
+
+	for(var i= 0; i < x.length; i++)
+	{
+
+		noUiSlider.create(x[i], {
+			start: [0],
+			connect: true,
+			step: 1,
+			range: {
+			'min': -10,
+			'max': 10
+			},
+			pips: { // Show a scale with the slider
+			mode: 'steps',
+			stepped: true,
+			density: 10
+			}
+		});
+	}
+	
+    var w = 500, h = 500;
+
+    $("input[type='radio']").change(function () {
+        redraw(false);
+    });
+
+    $("input[type='checkbox']").change(function () {
+        redraw(false);
+    })
+
+
+    $('input[name=ap1]').change(function () {
+        if ($(this).val() == 1) {
+            $('#sec_ap2').show();
+            $('#sec_ap4').hide();
+            $('#sec_ap5').hide();
+        }
+        else {
+            $('#sec_ap2').hide();
+            $('#sec_ap3').hide();
+            $('#sec_ap4').show();
+        }
+    });
+
+    $('input[name=ap2]').change(function () {
+        if ($(this).val() == 1) {
+            $('#sec_ap3').show();
+        }
+        else {
+            $('#sec_ap3').hide();
+        }
+    });
+
+    $('input[name=ap4]').change(function () {
+        if ($(this).val() == 1) {
+            $('#sec_ap5').hide();
+        }
+        else {
+            $('#sec_ap5').show();
+        }
+    });
+
+    function redraw(bStart) {
+
+        /* PHYSICAL ACTIVITY */
+        var pa1 = $('input:radio[name=ap1]:checked').val();
+        var pa2 = $('input:radio[name=ap2]:checked').val();
+        var pa3 = $('input:radio[name=ap3]:checked').val();
+        var pa4 = $('input:radio[name=ap4]:checked').val();
+        var pa5 = $('input:radio[name=ap5_1]:checked').val();
+        var pa6 = $('input:radio[name=ap5_2]:checked').val();
+
+        var physicalActivity;
+
+        if (pa1 == 1 && pa2 == 1 && pa3 == 1) {
+            physicalActivity = 6;
+        }
+        else if (pa1 == 1 && pa2 == 1 && pa3 == 0) {
+            physicalActivity = 5;
+        }
+        else if (pa1 == 1 && pa2 == 0) {
+            physicalActivity = 4;
+        }
+        else if (pa1 == 0 && pa4 == 1) {
+            physicalActivity = 3;
+        }
+        else if (pa1 == 0 && pa4 == 0 && pa5 == 0 && pa6 == 0) {
+            physicalActivity = 1;
+        }
+        else if ((pa1 == 0 && pa4 == 0 && pa5 == 1 && pa6 == 0) || (pa1 == 0 && pa4 == 0 && pa5 == 0 && pa6 == 1) || (pa1 == 0 && pa4 == 0 && pa5 == 1 && pa6 == 1)) {
+            physicalActivity = 2;
+        }
+        else {
+            physicalActivity = 0;
+        }
+
+        var paPlot = physicalActivity / 6 * 100;
+
+        /* MARCHE SANS AIDE */
+        var walkHelp = $('input:radio[name=q1]:checked').val();
+        var walkHelpPlot = (walkHelp / 5) * 100;
+
+        /* VITESSE DE MARCHE */
+        var walkSpeed = $('input:radio[name=q2]:checked').val();
+        var walkSpeedPlot = (walkSpeed / 5) * 100;
+
+        /* TEMPS DE MARCHE */
+        var walkTime = $('input:radio[name=q3]:checked').val();
+        var walkTimePlot = (walkTime / 7) * 100;
+
+        /* CAPACITE A MONTER */
+        var climb1 = parseInt($('input:radio[name=q4_1]:checked').val(), 10);
+        var climb2 = parseInt($('input:radio[name=q4_2]:checked').val(), 10);
+        var climb3 = parseInt($('input:radio[name=q4_3]:checked').val(), 10);
+        var climb = climb1 + climb2 + climb3;
+        var climbPlot = (climb / 27) * 100;
+        if (climb1 == 0) {
+            climbPlot = 0;
+            $('#etage3').hide();
+            $('#etage5').hide();
+        } else {
+            $('#etage3').show();
+            $('#etage5').show();
+        }
+        /*
+         if (climb1 > 0 && climb2 == 5){
+         climbPlot = (climb / 27) * 100;
+         $('#etage5').hide();
+         } else if (climb1 > 0 && climb2 > 5) {
+         $('#etage5').show();
+         }*/
+
+        /* ASSURANCE A MARCHER */
+        var secure = parseInt($('input:radio[name=q8_1]:checked').val(), 10);
+        secure = secure + parseInt($('input:radio[name=q8_2]:checked').val(), 10);
+        secure = secure + parseInt($('input:radio[name=q8_3]:checked').val(), 10);
+        var securePlot = (secure / 5) * 100;
+
+        /* PEUR DU VIDE */
+        var voids = $('input:radio[name=q5]:checked').val();
+        var voidsPlot = 100 - (voids / 1 * 100);
+
+        /* EQUILIBRE */
+        var equilibre = $('input:radio[name=q9]:checked').val();
+        var equilibrePlot = (equilibre / 2 * 100);
+
+        /* DOULEURS */
+        var pain = $('input:checkbox[name=q6]:checked').length;
+        var painPlot = 100 - (pain / 5 * 100);
+        if ($('#r6_6:checkbox:checked').length > 0) {
+            painPlot = 100;
+            $('input:checkbox[name=q6]').prop('checked', false);
+            $('#r6_6').prop('checked', true);
+        }
+        if (pain === 0) {
+            painPlot = 0;
+        }
+
+        /* MOBILITE ARTICULAIRE */
+        var mobility = $('input:checkbox[name=q7]:checked').length;
+        var mobilityPlot = 100 - (mobility / 3 * 100);
+        if ($('#r7_4:checkbox:checked').length > 0) {
+            mobilityPlot = 100;
+            $('input:checkbox[name=q7]').prop('checked', false);
+            $('#r7_4').prop('checked', true);
+        }
+        if (mobility === 0) {
+            mobilityPlot = 0;
+        }
+
+        var rec1 = '';
+        if (walkTime == 7) rec1 = "3h";
+        else if (walkTime == 6) rec1 = "2h";
+        else if (walkTime == 5) rec1 = "1h";
+        else if (walkTime == 4) rec1 = "30 min";
+        else if (walkTime == 3) rec1 = "15 min";
+        else if (walkTime == 2) rec1 = "5 min";
+        else if (walkTime < 2) rec1 = "Pas de marche";
+
+        var rec2 = '';
+        if (walkSpeed == 1) rec2 = "Proposer d'augmenter le temps indiqué de 30%";
+        else if (walkSpeed == 2) rec2 = "Proposer d'augmenter le temps indiqué de 10%";
+        else if (walkSpeed == 3) rec2 = "Proposer le temps indiqué";
+        else if (walkSpeed == 4) rec2 = "Proposer de réduire le temps de 10%";
+        else if (walkSpeed == 5) rec2 = "Proposer de réduire le temps de 20%";
+
+        var rec3 = '';
+        if (voids == 1) rec3 = "Pas de chemins exposés";
+        else if (voids == 0) rec3 = "Chemins exposés possibles";
+
+        var rec4 = '';
+        if (climb3 > 12) rec4 = "Des dénivelés importants possibles";
+        else if (climb3 > 10) rec4 = "Des dénivelés modérés possibles";
+        else if (climb2 > 5) rec4 = "Seulement des dénivelés faibles à modérés possibles";
+        else if (climb1 > 0) rec4 = "Seulement des dénivelés très faibles possibles";
+        else if (climb1 == 0) rec4 = "pas des dénivelés possibles";
+
+        var rec5 = '';
+        if (secure < 5 && secure > 0) rec5 = "Proposer des randonnées accompagnées ou des chemins simples";
+        else if (secure == 0) rec5 = "Proposer des chemins sans trop de difficulté (risque de chutes) et des randonnées accompagnées";
+        else if (secure == 5) rec5 = "Pas de problèmes avec l'equilibre ou des risques de chutes; pas de propositions nécessaires";
+
+        var rec6 = '';
+        if (physicalActivity == 6) rec6 = "Bravo, continuez!";
+        if (physicalActivity == 5) rec6 = "Proposer brochures sur l'activité physique ou conseils individuels dans centre de sports";
+        if (physicalActivity == 4) rec6 = "Proposer brochures sur l'activité physique ou conseils individuels dans centre de sports";
+        if (physicalActivity == 3) rec6 = "Proposer brochures pour surmonter les éventuelles barrières";
+        if (physicalActivity == 2) rec6 = "Proposer brochures pour encourager de reprendre l'activité physique.";
+        if (physicalActivity == 1) rec6 = "Proposer brochures pour encourager de reprendre l'activité physique et brochure sur les bénefices de l'activité physique.";
+
+        if (rec1 != '')$('#rec1').text(rec1);
+        if (rec2 != '')$('#rec2').text(rec2);
+        if (rec3 != '')$('#rec3').text(rec3);
+        if (rec4 != '')$('#rec4').text(rec4);
+        if (rec5 != '') $('#rec5').text(rec5);
+        if (physicalActivity > 0 ) {$('#rec6').text(rec6);}
+
+
+        /*$("input:radio").attr("checked", false);
+         $('#sec_ap2').hide();
+         $('#sec_ap3').hide();
+         $('#sec_ap4').hide();
+         $('#sec_ap5').hide();*/
+
+
+        if (bStart == true) {
+            paPlot = 0;
+            walkHelpPlot = 0;
+            walkSpeedPlot = 0;
+            walkTimePlot = 0;
+            climbPlot = 0;
+            securePlot = 0;
+            voidsPlot = 0;
+            equilibrePlot = 0;
+            painPlot = 0;
+            mobilityPlot = 0;
+
+        }
+        Highcharts.chart('radarID', {
+
+            chart: {
+                polar: true,
+                type: 'line'
+            },
+
+            title: {
+                text: 'Votre niveau fitness',
+            },
+
+            pane: {
+                size: '80%'
+            },
+
+            xAxis: {
+                categories: ['Activité physique', 'Marcher sans aides', 'Vitesse marche', 'Temps de marche',
+                    'Capacité à monter', 'Assurance à marcher', 'Pas peur du vide', 'Equilibre', 'Sans douleurs', 'Mobilité articulaire'],
+                tickmarkPlacement: 'on',
+                lineWidth: 0
+            },
+
+            yAxis: {
+                gridLineInterpolation: 'polygon',
+                lineWidth: 0,
+                min: 0,
+                max: 100
+            },
+
+            tooltip: {
+                shared: true,
+                pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}</b><br/>'
+            },
+
+            legend: {
+                align: 'bottom',
+                verticalAlign: 'top',
+                y: 70,
+                layout: 'vertical'
+            },
+
+            series: [{
+                name: 'Votre niveau ',
+                data: [paPlot, walkHelpPlot, walkSpeedPlot, walkTimePlot, climbPlot, securePlot, voidsPlot, equilibrePlot, painPlot, mobilityPlot],
+                pointPlacement: 'on'
+            }]
+        });
+    }
+
+	//Chart préférences
+	Highcharts.chart('radarPref', {
+
+    chart: {
+        polar: true
+    },
+
+    title: {
+        text: 'Highcharts Polar Chart'
+    },
+
+    pane: {
+        startAngle: 0,
+        endAngle: 360
+    },
+
+    xAxis: {
+        tickInterval: 45,
+        min: 0,
+        max: 360,
+        labels: {
+            formatter: function () {
+                return this.value + '°';
+            }
+        }
+    },
+
+    yAxis: {
+        min: 0
+    },
+
+    plotOptions: {
+        series: {
+            pointStart: 0,
+            pointInterval: 45
+        },
+        column: {
+            groupPadding: 0
+        }
+    },
+
+    series: [{
+        type: 'column',
+        name: 'Column',
+        data: [8, 7, 6, 5, 4, 3, 2, 1],
+        pointPlacement: 'between'
+    }]
+});
+
+</script>
+
