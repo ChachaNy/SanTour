@@ -1,0 +1,14 @@
+html, body, .bloc {height: 100%;}
+
+#recommendationsID{
+	margin-bottom:1%;
+}
+.formContent, .footer-copyright{margin-left:1%;}
+.noUi-value-sub, .noUi-value {margin-top:5px;}
+@media (max-width: 768px){
+	.target{position:relative !important;overflow: auto;}
+}
+
+
+
+
