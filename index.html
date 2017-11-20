@@ -597,6 +597,8 @@
 		
 		$('.scrollspy').scrollSpy();
 	});
+    
+    pathVector();
 
     $("input[type='radio']").change(function () {
         redraw(false);
@@ -907,6 +909,19 @@
 			pointPlacement: 'between'
 		}]
 	});	 
+    
+  function pathVector() {
+
+    $.getJSON( "parcours.json", function( data ) {
+        
+      var paths=data.paths
+      var items = [];
+      $.each( paths, function( key, val ) {
+        //items.push( "<li id='" + key + "'>" + val + "</li>" );
+        console.print(key+":"+val)
+      });
+    });
+  }
 </script>
 </body>
 
