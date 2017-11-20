@@ -2,6 +2,7 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
+	<meta name="viewport" content="initial-scale=1">
     <title>SanTour</title>
 
 
@@ -26,6 +27,7 @@
 
 	
 	  <div class="row">
+		
 		  <div class="col l6 m6 s12">
 			<div class="section" id="banner">
 				<div>
@@ -290,15 +292,15 @@
 						<div class="section">
 							<h5>Douleurs</h5>
 							<p>Avez vous des douleurs?</p>
-							<input name="q6" id="r6_1" value="1" type="checkbox">
+							<input name="q6" id="r6_1" value="1" type="checkbox" onclick="checkPain(this)">
 							<label for="r6_1">Douleurs dans la hanche</label>
-							<input name="q6" id="r6_2" value="1" type="checkbox">
+							<input name="q6" id="r6_2" value="1" type="checkbox" onclick="checkPain(this)">
 							<label for="r6_2">Douleurs aux genoux</label>
-							<input name="q6" id="r6_3" value="1" type="checkbox">
+							<input name="q6" id="r6_3" value="1" type="checkbox" onclick="checkPain(this)">
 							<label for="r6_3">Douleurs aux pieds</label>
-							<input name="q6" id="r6_4" value="1" type="checkbox">
+							<input name="q6" id="r6_4" value="1" type="checkbox" onclick="checkPain(this)">
 							<label for="r6_4">Douleurs au dos</label>
-							<input name="q6" id="r6_5" value="1" type="checkbox">
+							<input name="q6" id="r6_5" value="1" type="checkbox" onclick="checkPain(this)">
 							<label for="r6_5">Douleurs ailleurs</label>
 							<input name="q6" id="r6_6" value="0" type="checkbox">
 							<label for="r6_6">Pas de douleurs</label>
@@ -312,11 +314,11 @@
 						<div class="section">
 							<h5>Mobilité articulaire</h5>
 							<p>Avez vous des problèmes de mobilité dans une ou plusieurs des articulations suivantes?</p>
-							<input name="q7" id="r7_1" value="1" type="checkbox">
+							<input name="q7" id="r7_1" value="1" type="checkbox" onclick="checkMobility(this)">
 							<label for="r7_1">Mobilité réduite à la cheville</label>
-							<input name="q7" id="r7_2" value="1" type="checkbox">
+							<input name="q7" id="r7_2" value="1" type="checkbox" onclick="checkMobility(this)">
 							<label for="r7_2">Mobilité réduite aux genoux</label>
-							<input name="q7" id="r7_3" value="1" type="checkbox">
+							<input name="q7" id="r7_3" value="1" type="checkbox" onclick="checkMobility(this)">
 							<label for="r7_3">Hanche</label>
 							<!--<input name="q7" id="r7_4" value="1" type="checkbox">
 							<label for="r7_4">Hanche</label>  A VERIFIER AVEC ROGER-->
@@ -344,37 +346,37 @@
 					 <div class="inner split">
 						<div class="section">
 							<h5>Les obstacles</h5>
-							<p>Évaluer de -10 (vous détestez) à +10 (vous aimez).</p>
+							<p>Évaluer de -10 (je déteste), 0 (ça m'est égal), à +10 (j'aime).</p>
 							<div class="row">						
-								<div class="col m1 s12">
+								<div class="col xl1 l12 s12">
 									<label for="r8_1"> Racines: </label>
 								</div>
-								<div class="col m4 s8">
-									<div id="r8_1" class="sliders"></div>
+								<div class="col xl4 l8 s8">
+									<div id="r8_1" class="sliders" onclick="redraw(false)"></div>
 								</div>
-								<div class="col m1 s4">
+								<div class="col xl1 l4 s4">
 									<input disabled="disabled" class="rValue" type="text" id="input-format0" style="height:22px;">
 								</div>								
 							</div> <!-- End of row -->
 								<div class="row">						
-								<div class="col m1 s12">
+								<div class="col xl1 l12 s12">
 									<label for="r8_2"> Cailloux: </label>
 								</div>
-								<div class="col m4 s8">
-									<div id="r8_2" class="sliders"></div>
+								<div class="col xl4 l8 s8">
+									<div id="r8_2" class="sliders" onclick="redraw(false)"></div>
 								</div>
-								<div class="col m1 s4">
+								<div class="col xl1 l4 s4">
 									<input disabled="disabled" class="rValue" type="text" id="input-format1" style="height:22px;">
 								</div>								
 							</div> <!-- End of row -->
 								<div class="row">						
-								<div class="col m1 s12">
+								<div class="col xl1 l12 s12">
 									<label for="r8_3"> Cabossé: </label>
 								</div>
-								<div class="col m4 s8">
-									<div id="r8_3" class="sliders"></div>
+								<div class="col xl4 l8 s8">
+									<div id="r8_3" class="sliders" onclick="redraw(false)"></div>
 								</div>
-								<div class="col m1 s4">
+								<div class="col xl1 l4 s4">
 									<input disabled="disabled" class="rValue" type="text" id="input-format2" style="height:22px;">
 								</div>								
 							</div> <!-- End of row -->
@@ -387,37 +389,37 @@
 					<div class="inner split">
 						<div class="section">
 							<h5>La topologie</h5>
-							<p>Évaluer de -10 (vous détestez) à +10 (vous aimez).</p>
+							<p>Évaluer de -10 (je déteste), 0 (ça m'est égal), à +10 (j'aime).</p>
 							<div class="row">						
-								<div class="col m1 s12">
+								<div class="col xl1 l12 s12">
 									<label for="r9_1"> Montées: </label>
 								</div>
-								<div class="col m4 s8">
-									<div id="r9_1" class="sliders"></div>
+								<div class="col xl4 l8 s8">
+									<div id="r9_1" class="sliders" onclick="redraw(false)"></div>
 								</div>
-								<div class="col m1 s4">
+								<div class="col xl1 l4 s4">
 									<input disabled="disabled" class="rValue" type="text" id="input-format3" style="height:22px;">
 								</div>								
 							</div> <!-- End of row -->
 							<div class="row">						
-								<div class="col m1 s12">
+								<div class="col xl1 l12 s12">
 									<label for="r9_2"> Descentes: </label>
 								</div>
-								<div class="col m4 s8">
-									<div id="r9_2" class="sliders"></div>
+								<div class="col xl4 l8 s8">
+									<div id="r9_2" class="sliders" onclick="redraw(false)"></div>
 								</div>
-								<div class="col m1 s4">
+								<div class="col xl1 l4 s4">
 									<input disabled="disabled" class="rValue" type="text" id="input-format4" style="height:22px;">
 								</div>								
 							</div> <!-- End of row -->
 							<div class="row">						
-								<div class="col m1 s12">
+								<div class="col xl1 l12 s12">
 									<label for="r9_3"> Plat: </label>
 								</div>
-								<div class="col m4 s8">
-									<div id="r9_3" class="sliders"></div>
+								<div class="col xl4 l8 s8">
+									<div id="r9_3" class="sliders" onclick="redraw(false)"></div>
 								</div>
-								<div class="col m1 s4">
+								<div class="col xl1 l4 s4">
 									<input disabled="disabled" class="rValue" type="text" id="input-format5" style="height:22px;">
 								</div>								
 							</div> <!-- End of row -->												
@@ -430,29 +432,40 @@
 					<div class="inner split">
 						<div class="section">
 							<h5>Peur du vide</h5>
-							<p>Évaluer de -10 (vous détestez) à +10 (vous aimez).</p>
+							<p>Évaluer de -10 (je déteste), 0 (ça m'est égal), à +10 (j'aime).</p>
 							<div class="row">						
-								<div class="col m1 s12">
+								<div class="col xl1 l12 s12">
 									<label for="r10_1"> Ponts: </label>
 								</div>
-								<div class="col m4 s8">
-									<div id="r10_1" class="sliders"></div>
+								<div class="col xl4 l8 s8">
+									<div id="r10_1" class="sliders" onclick="redraw(false)"></div>
 								</div>
-								<div class="col m1 s4">
+								<div class="col xl1 l4 s4">
 									<input disabled="disabled" class="rValue" type="text" id="input-format6" style="height:22px;">
 								</div>								
 							</div> <!-- End of row -->						
 							<div class="row">						
-								<div class="col m1 s12">
+								<div class="col xl1 l12 s12">
 									<label for="r10_2"> Crètes: </label>
 								</div>
-								<div class="col m4 s8">
-									<div id="r10_2" class="sliders"></div>
+								<div class="col xl4 l8 s8">
+									<div id="r10_2" class="sliders" onclick="redraw(false)"></div>
 								</div>
-								<div class="col m1 s4">
+								<div class="col xl1 l4 s4">
 									<input disabled="disabled" class="rValue" type="text" id="input-format7" style="height:22px;">
 								</div>								
-							</div> <!-- End of row -->						
+							</div> <!-- End of row -->
+							<div class="row">						
+								<div class="col xl1 l12 s12">
+									<label for="r10_3"> Main courante: </label>
+								</div>
+								<div class="col xl4 l8 s8">
+									<div id="r10_3" class="sliders" onclick="redraw(false)"></div>
+								</div>
+								<div class="col xl1 l4 s4">
+									<input disabled="disabled" class="rValue" type="text" id="input-format8" style="height:22px;">
+								</div>								
+							</div> <!-- End of row -->								
 						</div>
 					 </div>
 				</div>
@@ -462,38 +475,38 @@
 					 <div class="inner split">
 						<div class="section">
 							<h5>Durée</h5>
-							<p>Évaluer de -10 (vous détestez) à +10 (vous aimez).</p>
+							<p>Évaluer de -10 (je déteste), 0 (ça m'est égal), à +10 (j'aime).</p>
 							<div class="row">						
-								<div class="col m1 s12">
+								<div class="col xl1 l12 s12">
 									<label for="r11_1"> 1h: </label>
 								</div>
-								<div class="col m4 s8">
-									<div id="r11_1" class="sliders"></div>
+								<div class="col xl4 l8 s8">
+									<div id="r11_1" class="sliders" onclick="redraw(false)"></div>
 								</div>
-								<div class="col m1 s4">
-									<input disabled="disabled" class="rValue" type="text" id="input-format8" style="height:22px;">
-								</div>								
-							</div> <!-- End of row -->					
-							<div class="row">						
-								<div class="col m1 s12">
-									<label for="r11_2"> 2h: </label>
-								</div>
-								<div class="col m4 s8">
-									<div id="r11_2" class="sliders"></div>
-								</div>
-								<div class="col m1 s4">
+								<div class="col xl1 l4 s4">
 									<input disabled="disabled" class="rValue" type="text" id="input-format9" style="height:22px;">
 								</div>								
 							</div> <!-- End of row -->					
 							<div class="row">						
-								<div class="col m1 s12">
+								<div class="col xl1 l12 s12">
+									<label for="r11_2"> 2h: </label>
+								</div>
+								<div class="col xl4 l8 s8">
+									<div id="r11_2" class="sliders" onclick="redraw(false)"></div>
+								</div>
+								<div class="col xl1 l4 s4">
+									<input disabled="disabled" class="rValue" type="text" id="input-format10" style="height:22px;">
+								</div>								
+							</div> <!-- End of row -->					
+							<div class="row">						
+								<div class="col xl1 l12 s12">
 									<label for="r11_3"> 3h et +: </label>
 								</div>
-								<div class="col m4 s8">
-									<div id="r11_3" class="sliders"></div>
+								<div class="col xl4 l8 s8">
+									<div id="r11_3" class="sliders" onclick="redraw(false)"></div>
 								</div>
-								<div class="col m1 s4">
-									<input disabled="disabled" class="rValue" type="text" id="input-format10" style="height:22px;">
+								<div class="col xl1 l4 s4">
+									<input disabled="disabled" class="rValue" type="text" id="input-format11" style="height:22px;">
 								</div>								
 							</div> <!-- End of row -->					
 						</div>
@@ -550,6 +563,17 @@
 
 <script>
 
+	function checkPain(checkbox){
+		if(checkbox.checked){
+			$('#r6_6').prop('checked', false);
+		}
+	}
+	
+	function checkMobility(checkbox){
+		if(checkbox.checked){
+			$('#r7_4').prop('checked', false);
+		}
+	}
 	
   //Create sliders
 	var x = document.getElementsByClassName("sliders");
@@ -585,6 +609,7 @@
 		inputFormat.addEventListener('change', function(){
 			sliderFormat.noUiSlider.set(this.value);
 		});
+	
 	}
 	
 	//Pushpin -> fixed right div 
@@ -862,51 +887,78 @@
                 pointPlacement: 'on'
             }]
         });
+		
+		/* OBSTACLES */
+		var racines = parseInt(document.getElementById('input-format0').value);
+		var cailloux = parseInt(document.getElementById('input-format1').value);
+		var cabosse = parseInt(document.getElementById('input-format2').value);
+		/* TOPOLOGIE */
+		var montees = parseInt(document.getElementById('input-format3').value);
+		var descentes = parseInt(document.getElementById('input-format4').value);
+		var plat = parseInt(document.getElementById('input-format5').value);
+		/* PEUR DU VIDE */
+		var ponts = parseInt(document.getElementById('input-format6').value);
+		var cretes = parseInt(document.getElementById('input-format7').value);
+		var courante = parseInt(document.getElementById('input-format8').value);
+		/* DUREE */
+		var uneH = parseInt(document.getElementById('input-format9').value);
+		var deuxH = parseInt(document.getElementById('input-format10').value);
+		var troisHplus = parseInt(document.getElementById('input-format11').value);
+		
+		var i = 0;	
+		//Chart préférences
+		Highcharts.chart('radarPref', {
+
+			chart: {
+				polar: true
+			},
+			title: {
+				text: 'Préférences'
+			},
+			pane: {
+				size: '60%',
+				startAngle: 0,
+				endAngle: 360
+			},
+			xAxis: {
+			
+				tickInterval: 30,
+				min: 0,
+				max: 360,
+				labels: {
+					formatter: function () {
+									
+						var lab = ['racines', 'cailloux', 'cabossé', 'montées', 'descentes', 'plat', 'ponts', 'crètes', 'main courante', '1h', '2h', '3h+'];
+						i++;
+						return lab[i-1];					
+					}
+				}
+			},
+			yAxis: {
+				min: -1
+			},
+			plotOptions: {
+				series: {
+					pointStart: 0,
+					pointInterval: 30
+				},
+				column: {
+					groupPadding: 0
+				}
+			},
+			series: [{
+				type: 'column',
+				name: 'Column',
+				data: [racines, cailloux, cabosse, montees, descentes, plat, ponts, cretes, courante, uneH, deuxH, troisHplus],
+				pointPlacement: 'between'
+			}]
+		});	
+		
     }
 	
-	//Chart préférences
-	Highcharts.chart('radarPref', {
+	
+	
 
-		chart: {
-			polar: true
-		},
-		title: {
-			text: 'Highcharts Polar Chart'
-		},
-		pane: {
-			size: '60%',
-			startAngle: 0,
-			endAngle: 360
-		},
-		xAxis: {
-			tickInterval: 45,
-			min: 0,
-			max: 360,
-			labels: {
-				formatter: function () {
-					return this.value + '°';
-				}
-			}
-		},
-		yAxis: {
-			min: 0
-		},
-		plotOptions: {
-			series: {
-				pointStart: 0,
-				pointInterval: 45
-			},
-			column: {
-				groupPadding: 0
-			}
-		},
-		series: [{
-			type: 'column',
-			name: 'Column',
-			data: [8, 7, 6, 5, 4, 3, 2, 1],
-			pointPlacement: 'between'
-		}]
-	});	 
 </script>
 </body>
 
