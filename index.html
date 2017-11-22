@@ -18,6 +18,7 @@
 	<script src="scripts/nouislider.min.js"></script>
 	<script src="js/wNumb.js"></script>
 	<script src="js/materialize.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
 	
 
 </head>
@@ -546,6 +547,9 @@
 							<span id="rec6"></span><br>
 						</div>
 					</div>
+                    
+                    <button onclick="scores()">Toco</button>
+
 				</div>
 			</div>
 
@@ -959,18 +963,72 @@
 		
     }
 	
-	
-	
+  function getSliderValue(name){
+      var value = parseInt(document.getElementById(name).value);
+      return (value/10)/2+0.5;
+  }	
+    
+  function scores(){
+     	/* OBSTACLES */
+		var racines = getSliderValue('input-format0');
+		var cailloux =getSliderValue('input-format1');
+		var cabosse = getSliderValue('input-format2');
+		/* TOPOLOGIE */
+        var montees = getSliderValue('input-format3');
+		var descentes = getSliderValue('input-format4');
+		var plat = getSliderValue('input-format5');
+		/* PEUR DU VIDE */
+		var ponts = getSliderValue('input-format6');
+		var cretes = getSliderValue('input-format7');
+		var courante = getSliderValue('input-format8');
+		/* DUREE */
+		var uneH = getSliderValue('input-format9');
+		var deuxH = getSliderValue('input-format10');
+		var troisHplus = getSliderValue('input-format11');
+      
+      var score=[racines,cailloux,cabosse,montees,descentes,plat,
+                 ponts,cretes,courante,uneH,deuxH,troisHplus];
+      console.log(score);
+  }	
 
   function pathVector() {
 
     $.getJSON( "parcours.json", function( data ) {
         
       var paths=data.paths
-      var items = [];
-      $.each( paths, function( key, val ) {
+      var vectors = [];
+      var i=0
+      $.each( paths, function( k,path ) {
         //items.push( "<li id='" + key + "'>" + val + "</li>" );
-        console.print(key+":"+val)
+        var profile=[]
+        profile.push(path.duration)
+        profile.push(path.distance)
+        profile.push(path.physical_condition)
+        profile.push(path.height_diff_pos)  
+        var coso= _.groupBy(path.difficulty_points,'kind')
+        $.each(coso,function(kk,dd){
+          console.log(_.max(dd,'level'))
+        })
+        var stone= _.max(coso.stone,"level")
+        var roots= _.max(coso.roots,"level")
+        var narrow= _.max(coso.narrow,"level")
+        var obstacle=stone.level+roots.level+narrow.level 
+        
+        var bridge= _.max(coso.bridge,"level")
+        var vide=bridge.level 
+        
+        var ups= _.max(coso.up,"level")
+        var downs= _.max(coso.down,"level")
+        var vertical= _.max(coso.vertical,"level")
+        var topology=ups.level+downs.level+vertical.level 
+          
+        
+        console.log("kiko "+obstacle)
+  
+        $.each(path.difficulty_points,function(k2,point){
+          point.value    
+        });
+        console.log(path.name)
       });
     });
   }	
