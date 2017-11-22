@@ -1000,17 +1000,22 @@
       var i=0
       $.each( paths, function( k,path ) {
         //items.push( "<li id='" + key + "'>" + val + "</li>" );
+        var coso= _.groupBy(path.difficulty_points,'kind')
         var profile=[]
-        profile.push(path.duration)
+        var dur1h=if (path.duration<1.5) 1 else 0;
+        var dur2h=if (path.duration>=1.5 and path.duration<2.5) 1 else 0;
+        var dur3h=if (path.duration>=2.5) 1 else 0;
+        var roots= _.max(coso.roots,"level") / 10;
+        var stone= _.max(coso.stone,"level") / 10;
+          
+        
+        profile.push(dur1h)
         profile.push(path.distance)
         profile.push(path.physical_condition)
         profile.push(path.height_diff_pos)  
-        var coso= _.groupBy(path.difficulty_points,'kind')
         $.each(coso,function(kk,dd){
           console.log(_.max(dd,'level'))
         })
-        var stone= _.max(coso.stone,"level")
-        var roots= _.max(coso.roots,"level")
         var narrow= _.max(coso.narrow,"level")
         var obstacle=stone.level+roots.level+narrow.level 
         
