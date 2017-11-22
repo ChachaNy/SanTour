@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="css/custom.css">
 	<link rel="stylesheet" href="cssFiles/nouislider.min.css">
 	
-	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script src="js/jquery-3.1.1.min.js"></script> 
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/highcharts-more.js"></script>
 	<script src="https://code.highcharts.com/modules/exporting.js"></script>
@@ -27,7 +27,6 @@
 
 	
 	  <div class="row">
-		
 		  <div class="col l6 m6 s12">
 			<div class="section" id="banner">
 				<div>
@@ -546,6 +545,12 @@
 							<span id="rec6"></span><br>
 						</div>
 					</div>
+					<div class="col m12 s12">
+						<div id="routesID" class="section">
+							
+						</div>
+					</div>
+					
 				</div>
 			</div>
 
@@ -956,6 +961,22 @@
 		});	
 		
     }
+	
+	addRoutes();
+	function addRoutes(){
+		const paragraph = document.createElement("P");
+		
+		$.getJSON('parcours.json',function(result) {
+			for(var i = 0; i<result.paths.length; i++){
+				const content = result.paths[i].name + ': ' + result.paths[i].duration + ', ' + result.paths[i].distance + 'km.';
+				console.log(result.paths[i].name);
+				$('<p>'+content+'</p>').appendTo('#routesID');
+			}
+		}).fail(function (j, t, e) {
+			console.error(e);
+		});
+				
+	}
 	
 	
 	
