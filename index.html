@@ -548,7 +548,7 @@
 						</div>
 					</div>
                     
-                    <button onclick="scores()">Toco</button>
+                    <button onclick="pathVector()">Toco</button>
 
 				</div>
 			</div>
@@ -989,10 +989,35 @@
       var score=[racines,cailloux,cabosse,montees,descentes,plat,
                  ponts,cretes,courante,uneH,deuxH,troisHplus];
       console.log(score);
+      return score;
   }	
 
-  function pathVector() {
+  function dotproduct(a,b) {
+    var n = 0, lim = Math.min(a.length,b.length);
+    for (var i = 0; i < lim; i++) n += a[i] * b[i];
+    return n;
+  }
 
+  function norm2(a) {
+    var sumsqr = 0; 
+    for (var i = 0; i < a.length; i++) 
+      sumsqr += a[i]*a[i]; 
+    return Math.sqrt(sumsqr);
+  }
+
+  function similarity(a, b) {
+    return dotproduct(a,b)/norm2(a)/norm2(b);
+  }
+    
+  function getLevel(field) {
+    if (field==null)
+      return 0;
+    else
+      return _.max(field,"level").level / 10;
+  }
+    
+  function pathVector() {
+    var scoreUser=scores();
     $.getJSON( "parcours.json", function( data ) {
         
       var paths=data.paths
@@ -1000,40 +1025,28 @@
       var i=0
       $.each( paths, function( k,path ) {
         //items.push( "<li id='" + key + "'>" + val + "</li>" );
+     console.log(path.duration)
         var coso= _.groupBy(path.difficulty_points,'kind')
-        var profile=[]
-        var dur1h=if (path.duration<1.5) 1 else 0;
-        var dur2h=if (path.duration>=1.5 and path.duration<2.5) 1 else 0;
-        var dur3h=if (path.duration>=2.5) 1 else 0;
-        var roots= _.max(coso.roots,"level") / 10;
-        var stone= _.max(coso.stone,"level") / 10;
-          
+        var dur1h=(path.duration<1.5)? 1 : 0;
+        var dur2h=(path.duration>=1.5 && path.duration<2.5)? 1 : 0;
+        var dur3h=(path.duration>=2.5)? 1 : 0;
+        var roots= getLevel(coso.roots);
+        var stone= getLevel(coso.stone);
+        var dirt = getLevel(coso.dirt);
+        var ups  = getLevel(coso.up);
+        var downs= getLevel(coso.down);
+        var flat =0;
+        var bridge= getLevel(coso.bridge);
+        var narrow= getLevel(coso.narrow);
+        var normal=0;
+        var pathScore=[roots,stone,dirt,ups,downs,flat,
+                      bridge,narrow,normal,dur1h,dur2h,dur3h];
         
-        profile.push(dur1h)
-        profile.push(path.distance)
-        profile.push(path.physical_condition)
-        profile.push(path.height_diff_pos)  
-        $.each(coso,function(kk,dd){
-          console.log(_.max(dd,'level'))
-        })
-        var narrow= _.max(coso.narrow,"level")
-        var obstacle=stone.level+roots.level+narrow.level 
-        
-        var bridge= _.max(coso.bridge,"level")
-        var vide=bridge.level 
-        
-        var ups= _.max(coso.up,"level")
-        var downs= _.max(coso.down,"level")
+        console.log(pathScore)
+        var distance=similarity(scoreUser,pathScore);
+        console.log("dist: "+distance)
         var vertical= _.max(coso.vertical,"level")
-        var topology=ups.level+downs.level+vertical.level 
-          
-        
-        console.log("kiko "+obstacle)
-  
-        $.each(path.difficulty_points,function(k2,point){
-          point.value    
-        });
-        console.log(path.name)
+       
       });
     });
   }	
