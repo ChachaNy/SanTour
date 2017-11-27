@@ -545,10 +545,12 @@
 							<span id="rec5"></span><br>
 							<b>Brochures/infos/conseils:</b>
 							<span id="rec6"></span><br>
+                            
+                            <p id="paths"></p>
 						</div>
 					</div>
                     
-                    <button onclick="pathVector()">Toco</button>
+                    <button onclick="computeScores()">Recommend</button>
 
 				</div>
 			</div>
@@ -627,8 +629,7 @@
 		$('.scrollspy').scrollSpy();
 	});
     
-    pathVector();
-
+    
     $("input[type='radio']").change(function () {
         redraw(false);
     });
@@ -1016,16 +1017,25 @@
       return _.max(field,"level").level / 10;
   }
     
-  function pathVector() {
-    var scoreUser=scores();
+  function getPathMetadata() {
+    var names=[];
+    $.getJSON( "parcours.json", function( data ) {    
+      var paths=data.paths
+      $.each( paths, function( k,path ) {
+          names.push(path.name);
+      });
+    });
+    return names;
+  }    
+  var names=getPathMetadata();    
+              
+  function computePathVectors() {
+    var vectors = [];
     $.getJSON( "parcours.json", function( data ) {
         
       var paths=data.paths
-      var vectors = [];
       var i=0
       $.each( paths, function( k,path ) {
-        //items.push( "<li id='" + key + "'>" + val + "</li>" );
-     console.log(path.duration)
         var coso= _.groupBy(path.difficulty_points,'kind')
         var dur1h=(path.duration<1.5)? 1 : 0;
         var dur2h=(path.duration>=1.5 && path.duration<2.5)? 1 : 0;
@@ -1041,14 +1051,28 @@
         var normal=0;
         var pathScore=[roots,stone,dirt,ups,downs,flat,
                       bridge,narrow,normal,dur1h,dur2h,dur3h];
-        
-        console.log(pathScore)
-        var distance=similarity(scoreUser,pathScore);
-        console.log("dist: "+distance)
+        vectors.push(pathScore);
         var vertical= _.max(coso.vertical,"level")
        
       });
+    }); 
+    return vectors;
+  }   
+    
+  var pathVectors=computePathVectors();    
+    
+  function computeScores() {
+    var scoreUser=scores();
+    var txt="";
+    console.log(pathVectors);
+    $.each( pathVectors, function( i,pathScore ) {
+        console.log(pathScore);
+        var distance=similarity(scoreUser,pathScore);
+        txt=txt+names[i]+"::"+distance+"<br>";
+        //console.log("dist: "+distance)       
     });
+    $("#paths").html(txt);
+    
   }	
 </script>
 </body>
