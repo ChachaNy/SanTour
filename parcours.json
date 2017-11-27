@@ -20,7 +20,9 @@
         {"id": "6", "kind":"vertical","type":"Verticalité", "level": 7},
         {"id": "7", "kind":"narrow","type":"Etroitesse", "level": 6},
         {"id": "8", "kind":"stone","type":"stone", "level": 5},
-        {"id": "9", "kind":"roots","type":"stone", "level": 2}
+        {"id": "9", "kind":"roots","type":"stone", "level": 2},
+        {"id": "25", "kind":"up","type":"Montee", "level": 8}
+
       ]
     },
     { "name": "Les Clautis",
@@ -50,7 +52,7 @@
         {"id": "14", "kind":"vertige","type":"Vertige", "level": 2},
         {"id": "15", "kind":"vertige","type":"Vertige", "level": 3},
         {"id": "16", "kind":"mousse","type":"Chemin de mousse", "level": 1},
-        {"id": "17", "kind":"roots","type":"Racines", "level": 3},
+        {"id": "17", "kind":"roots","type":"Racines", "level": 7},
         {"id": "18", "kind":"stone","type":"Cailloux", "level": 5},
         {"id": "19", "kind":"stone","type":"Cailloux", "level": 3},
         {"id": "20", "kind":"vertige","type":"Vertige", "level": 2},
@@ -118,8 +120,11 @@
       "altitude_min": 1675,
       "physical_codition": "Weak",
       "difficulty_points": [
-        {"id": "1", "kind":"bridge","type":"Pont avec marches", "level": 2},
-        {"id": "2", "kind":"dirt","type":"Route de terre", "level": 1}
+        {"id": "1", "kind":"bridge","type":"Pont avec marches", "level": 4},
+        {"id": "25", "kind":"vertical","type":"Montee", "level": 1},
+        {"id": "2", "kind":"dirt","type":"Route de terre", "level": 1},
+        {"id": "9", "kind":"dirt","type":"Route de terre", "level": 6}
+
       ]
 
     }

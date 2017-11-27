@@ -518,7 +518,7 @@
 
 		<div class="col l6 m6 s12" >
 			
-			<div class="target"> 
+			<div class="target" style="overflow-y: scroll; height: 100%;"> 
 				<div class="row z-depth-3" >
 					<div class="col m6 s12">
 						<div id="radarID"></div>
@@ -531,8 +531,9 @@
 
 
 					<div class="col m12 s12">
-						<div id="recommendationsID" class="section">
+						<div id="recommendationsID" class="section" >
 							<h5>Recommandations</h5>
+                            <div style="display: none;">
 							<b>Durée de la route à proposer:</b>
 							<span id="rec1"></span><br>
 							<b>Vitesse de la marche:</b>
@@ -545,12 +546,16 @@
 							<span id="rec5"></span><br>
 							<b>Brochures/infos/conseils:</b>
 							<span id="rec6"></span><br>
-                            
+                            </div>
+                            <table id="pathTable" class="highlight">
+                             
+                              
+                            </table>
                             <p id="paths"></p>
 						</div>
 					</div>
                     
-                    <button onclick="computeScores()">Recommend</button>
+                    <button class="waves-effect waves-light btn" onclick="computeScores()">Recommandation</button>
 
 				</div>
 			</div>
@@ -1022,12 +1027,12 @@
     $.getJSON( "parcours.json", function( data ) {    
       var paths=data.paths
       $.each( paths, function( k,path ) {
-          names.push(path.name);
+          names.push(path);
       });
     });
     return names;
   }    
-  var names=getPathMetadata();    
+  var metadata=getPathMetadata();    
               
   function computePathVectors() {
     var vectors = [];
@@ -1045,7 +1050,7 @@
         var dirt = getLevel(coso.dirt);
         var ups  = getLevel(coso.up);
         var downs= getLevel(coso.down);
-        var flat =0;
+        var flat = 1 - getLevel(coso.vertical);
         var bridge= getLevel(coso.bridge);
         var narrow= getLevel(coso.narrow);
         var normal=0;
@@ -1065,13 +1070,14 @@
     var scoreUser=scores();
     var txt="";
     console.log(pathVectors);
+    $("#pathTable").html('<thead><th></th><th>Parcours</th><th>distance</th><th>temps</th><th>lien</th><th>score</th></thead>');
     $.each( pathVectors, function( i,pathScore ) {
         console.log(pathScore);
         var distance=similarity(scoreUser,pathScore);
-        txt=txt+names[i]+"::"+distance+"<br>";
+        $("#pathTable").append('<tr><td><img height="50" src="'+metadata[i].image+'" class="circle"></td><td>'+metadata[i].name+'</td><td>'+metadata[i].distance+'km</td><td>'+metadata[i].duration+'h</td><td><a href="'+metadata[i].link+'">Snukr</a></td><td>score '+distance.toFixed(2)+'</td> </tr>');
         //console.log("dist: "+distance)       
     });
-    $("#paths").html(txt);
+    //$("#pathTable").html(txt);
     
   }	
 </script>
