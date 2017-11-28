@@ -32,7 +32,7 @@
 		  <div class="col l6 m6 s12">
 			<div class="section" id="banner">
 				<div>
-					<img class="responsive-img" src="img/banner-816.jpg">
+					<img class="responsive-img" src="img/SanTour.jpg">
 				</div>
 			</div>
 			
@@ -552,10 +552,11 @@
                               
                             </table>
                             <p id="paths"></p>
+							<button class="waves-effect waves-light btn" onclick="computeScores()">Recommandation</button>
 						</div>
 					</div>
                     
-                    <button class="waves-effect waves-light btn" onclick="computeScores()">Recommandation</button>
+                    
 
 				</div>
 			</div>
@@ -615,6 +616,7 @@
 	function sliderValue(sliderFormat, inputFormat){
 		sliderFormat.noUiSlider.on('update', function( values, handle ) {
 			inputFormat.value = values[handle];
+			redraw(false);
 		});
 
 		inputFormat.addEventListener('change', function(){
@@ -1069,16 +1071,24 @@
   function computeScores() {
     var scoreUser=scores();
     var txt="";
+	var map = new Map();
     console.log(pathVectors);
     $("#pathTable").html('<thead><th></th><th>Parcours</th><th>distance</th><th>temps</th><th>lien</th><th>score</th></thead>');
     $.each( pathVectors, function( i,pathScore ) {
         console.log(pathScore);
         var distance=similarity(scoreUser,pathScore);
-        $("#pathTable").append('<tr><td><img height="50" src="'+metadata[i].image+'" class="circle"></td><td>'+metadata[i].name+'</td><td>'+metadata[i].distance+'km</td><td>'+metadata[i].duration+'h</td><td><a href="'+metadata[i].link+'" target="_blank">Snukr</a></td><td>score '+distance.toFixed(2)+'</td> </tr>');
-        //console.log("dist: "+distance)       
+		txt = '<tr><td><img height="50" src="'+metadata[i].image+'" class="circle"></td><td>'+metadata[i].name+'</td><td>'+metadata[i].distance+'km</td><td>'+metadata[i].duration+'h</td><td><a href="'+metadata[i].link+'">Snukr</a></td><td>score '+distance.toFixed(2)+'</td> </tr>';
+		map.set(distance, txt);  
     });
     //$("#pathTable").html(txt);
     
+	let keys = Array.from(map.keys() );
+	
+	keys.sort();
+	
+	for(i=keys.length-1; i>=0; i--){
+		$("#pathTable").append(map.get(keys[i]));
+	}
   }	
 </script>
 </body>
