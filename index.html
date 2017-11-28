@@ -616,6 +616,7 @@
 	function sliderValue(sliderFormat, inputFormat){
 		sliderFormat.noUiSlider.on('update', function( values, handle ) {
 			inputFormat.value = values[handle];
+			redraw(false);
 		});
 
 		inputFormat.addEventListener('change', function(){
