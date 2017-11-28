@@ -18,6 +18,7 @@
 	<script src="scripts/nouislider.min.js"></script>
 	<script src="js/wNumb.js"></script>
 	<script src="js/materialize.js"></script>
+    <script src="http://underscorejs.org/underscore-min.js"></script>
 	
 
 </head>
@@ -31,7 +32,7 @@
 		  <div class="col l6 m6 s12">
 			<div class="section" id="banner">
 				<div>
-					<img class="responsive-img" src="img/banner-816.jpg">
+					<img class="responsive-img" src="img/SanTour.jpg">
 				</div>
 			</div>
 			
@@ -544,14 +545,14 @@
 							<span id="rec5"></span><br>
 							<b>Brochures/infos/conseils:</b>
 							<span id="rec6"></span><br>
+                            
+                            <p id="paths"></p>
+							<button onclick="computeScores()">Proposer trajets</button>
 						</div>
 					</div>
-					
-					<div class="col m12 s12">
-						<div id="routesID" class="section">
-							
-						</div>
-					</div>
+                    
+                    
+
 				</div>
 			</div>
 
@@ -568,6 +569,7 @@
 
 
 <script>
+
 	function checkPain(checkbox){
 		if(checkbox.checked){
 			$('#r6_6').prop('checked', false);
@@ -582,8 +584,10 @@
 	
   //Create sliders
 	var x = document.getElementsByClassName("sliders");
+
 	for(var i= 0; i < x.length; i++)
 	{
+
 		noUiSlider.create(x[i], {
 			start: [0],
 			connect: true,
@@ -598,13 +602,17 @@
 		var sliderFormat = x[i];
 		
 		var inputFormat = document.getElementById('input-format'+i);
+
 		sliderValue(sliderFormat, inputFormat);
+
+
 	}
 	
 	function sliderValue(sliderFormat, inputFormat){
 		sliderFormat.noUiSlider.on('update', function( values, handle ) {
 			inputFormat.value = values[handle];
 		});
+
 		inputFormat.addEventListener('change', function(){
 			sliderFormat.noUiSlider.set(this.value);
 		});
@@ -621,14 +629,18 @@
 		
 		$('.scrollspy').scrollSpy();
 	});
+    
+    
     $("input[type='radio']").change(function () {
         redraw(false);
     });
+
     $("input[type='checkbox']").change(function () {
         redraw(false);
     })
 	
 	redraw(true);
+
     $('input[name=ap1]').change(function () {
         if ($(this).val() == 1) {
             $('#sec_ap2').show();
@@ -641,6 +653,7 @@
             $('#sec_ap4').show();
         }
     });
+
     $('input[name=ap2]').change(function () {
         if ($(this).val() == 1) {
             $('#sec_ap3').show();
@@ -649,6 +662,7 @@
             $('#sec_ap3').hide();
         }
     });
+
     $('input[name=ap4]').change(function () {
         if ($(this).val() == 1) {
             $('#sec_ap5').hide();
@@ -657,7 +671,9 @@
             $('#sec_ap5').show();
         }
     });
+
     function redraw(bStart) {
+
         /* PHYSICAL ACTIVITY */
         var pa1 = $('input:radio[name=ap1]:checked').val();
         var pa2 = $('input:radio[name=ap2]:checked').val();
@@ -665,7 +681,9 @@
         var pa4 = $('input:radio[name=ap4]:checked').val();
         var pa5 = $('input:radio[name=ap5_1]:checked').val();
         var pa6 = $('input:radio[name=ap5_2]:checked').val();
+
         var physicalActivity;
+
         if (pa1 == 1 && pa2 == 1 && pa3 == 1) {
             physicalActivity = 6;
         }
@@ -687,16 +705,21 @@
         else {
             physicalActivity = 0;
         }
+
         var paPlot = physicalActivity / 6 * 100;
+
         /* MARCHE SANS AIDE */
         var walkHelp = $('input:radio[name=q1]:checked').val();
         var walkHelpPlot = (walkHelp / 5) * 100;
+
         /* VITESSE DE MARCHE */
         var walkSpeed = $('input:radio[name=q2]:checked').val();
         var walkSpeedPlot = (walkSpeed / 5) * 100;
+
         /* TEMPS DE MARCHE */
         var walkTime = $('input:radio[name=q3]:checked').val();
         var walkTimePlot = (walkTime / 7) * 100;
+
         /* CAPACITE A MONTER */
         var climb1 = parseInt($('input:radio[name=q4_1]:checked').val(), 10);
         var climb2 = parseInt($('input:radio[name=q4_2]:checked').val(), 10);
@@ -718,17 +741,21 @@
          } else if (climb1 > 0 && climb2 > 5) {
          $('#etage5').show();
          }*/
+
         /* ASSURANCE A MARCHER */
         var secure = parseInt($('input:radio[name=q8_1]:checked').val(), 10);
         secure = secure + parseInt($('input:radio[name=q8_2]:checked').val(), 10);
         secure = secure + parseInt($('input:radio[name=q8_3]:checked').val(), 10);
         var securePlot = (secure / 5) * 100;
+
         /* PEUR DU VIDE */
         var voids = $('input:radio[name=q5]:checked').val();
         var voidsPlot = 100 - (voids / 1 * 100);
+
         /* EQUILIBRE */
         var equilibre = $('input:radio[name=q9]:checked').val();
         var equilibrePlot = (equilibre / 2 * 100);
+
         /* DOULEURS */
         var pain = $('input:checkbox[name=q6]:checked').length;
         var painPlot = 100 - (pain / 5 * 100);
@@ -740,6 +767,7 @@
         if (pain === 0) {
             painPlot = 0;
         }
+
         /* MOBILITE ARTICULAIRE */
         var mobility = $('input:checkbox[name=q7]:checked').length;
         var mobilityPlot = 100 - (mobility / 3 * 100);
@@ -751,6 +779,7 @@
         if (mobility === 0) {
             mobilityPlot = 0;
         }
+
         var rec1 = '';
         if (walkTime == 7) rec1 = "3h";
         else if (walkTime == 6) rec1 = "2h";
@@ -759,25 +788,30 @@
         else if (walkTime == 3) rec1 = "15 min";
         else if (walkTime == 2) rec1 = "5 min";
         else if (walkTime < 2) rec1 = "Pas de marche";
+
         var rec2 = '';
         if (walkSpeed == 1) rec2 = "Proposer d'augmenter le temps indiqué de 30%";
         else if (walkSpeed == 2) rec2 = "Proposer d'augmenter le temps indiqué de 10%";
         else if (walkSpeed == 3) rec2 = "Proposer le temps indiqué";
         else if (walkSpeed == 4) rec2 = "Proposer de réduire le temps de 10%";
         else if (walkSpeed == 5) rec2 = "Proposer de réduire le temps de 20%";
+
         var rec3 = '';
         if (voids == 1) rec3 = "Pas de chemins exposés";
         else if (voids == 0) rec3 = "Chemins exposés possibles";
+
         var rec4 = '';
         if (climb3 > 12) rec4 = "Des dénivelés importants possibles";
         else if (climb3 > 10) rec4 = "Des dénivelés modérés possibles";
         else if (climb2 > 5) rec4 = "Seulement des dénivelés faibles à modérés possibles";
         else if (climb1 > 0) rec4 = "Seulement des dénivelés très faibles possibles";
         else if (climb1 == 0) rec4 = "pas des dénivelés possibles";
+
         var rec5 = '';
         if (secure < 5 && secure > 0) rec5 = "Proposer des randonnées accompagnées ou des chemins simples";
         else if (secure == 0) rec5 = "Proposer des chemins sans trop de difficulté (risque de chutes) et des randonnées accompagnées";
         else if (secure == 5) rec5 = "Pas de problèmes avec l'equilibre ou des risques de chutes; pas de propositions nécessaires";
+
         var rec6 = '';
         if (physicalActivity == 6) rec6 = "Bravo, continuez!";
         if (physicalActivity == 5) rec6 = "Proposer brochures sur l'activité physique ou conseils individuels dans centre de sports";
@@ -785,17 +819,22 @@
         if (physicalActivity == 3) rec6 = "Proposer brochures pour surmonter les éventuelles barrières";
         if (physicalActivity == 2) rec6 = "Proposer brochures pour encourager de reprendre l'activité physique.";
         if (physicalActivity == 1) rec6 = "Proposer brochures pour encourager de reprendre l'activité physique et brochure sur les bénefices de l'activité physique.";
+
         if (rec1 != '')$('#rec1').text(rec1);
         if (rec2 != '')$('#rec2').text(rec2);
         if (rec3 != '')$('#rec3').text(rec3);
         if (rec4 != '')$('#rec4').text(rec4);
         if (rec5 != '') $('#rec5').text(rec5);
         if (physicalActivity > 0 ) {$('#rec6').text(rec6);}
+
+
         /*$("input:radio").attr("checked", false);
          $('#sec_ap2').hide();
          $('#sec_ap3').hide();
          $('#sec_ap4').hide();
          $('#sec_ap5').hide();*/
+
+
         if (bStart == true) {
             paPlot = 0;
             walkHelpPlot = 0;
@@ -807,40 +846,49 @@
             equilibrePlot = 0;
             painPlot = 0;
             mobilityPlot = 0;
+
         }
         Highcharts.chart('radarID', {
+
             chart: {
                 polar: true,
                 type: 'line'
             },
+
             title: {
                 text: 'Votre niveau fitness',
             },
+
             pane: {
                 size: '60%'
             },
+
             xAxis: {
                 categories: ['Activité physique', 'Marcher sans aides', 'Vitesse marche', 'Temps de marche',
                     'Capacité à monter', 'Assurance à marcher', 'Pas peur du vide', 'Equilibre', 'Sans douleurs', 'Mobilité articulaire'],
                 tickmarkPlacement: 'on',
                 lineWidth: 0
             },
+
             yAxis: {
                 gridLineInterpolation: 'polygon',
                 lineWidth: 0,
                 min: 0,
                 max: 100
             },
+
             tooltip: {
                 shared: true,
                 pointFormat: '<span style="color:{series.color}">{series.name}: <b>{point.y:,.0f}</b><br/>'
             },
+
             legend: {
                 align: 'bottom',
                 verticalAlign: 'top',
                 y: 70,
                 layout: 'vertical'
             },
+
             series: [{
                 name: 'Votre niveau ',
                 data: [paPlot, walkHelpPlot, walkSpeedPlot, walkTimePlot, climbPlot, securePlot, voidsPlot, equilibrePlot, painPlot, mobilityPlot],
@@ -868,6 +916,7 @@
 		var i = 0;	
 		//Chart préférences
 		Highcharts.chart('radarPref', {
+
 			chart: {
 				polar: true
 			},
@@ -916,21 +965,124 @@
 		
     }
 	
-	addRoutes();
-	function addRoutes(){
-		const paragraph = document.createElement("P");
-		
-		$.getJSON('parcours.json',function(result) {
-			for(var i = 0; i<result.paths.length; i++){
-				const content = result.paths[i].name + ': ' + result.paths[i].duration + ', ' + result.paths[i].distance + 'km.';
-				console.log(result.paths[i].name);
-				$('<p>'+content+'</p>').appendTo('#routesID');
-			}
-		}).fail(function (j, t, e) {
-			console.error(e);
-		});
-				
+  function getSliderValue(name){
+      var value = parseInt(document.getElementById(name).value);
+      return (value/10)/2+0.5;
+  }	
+    
+  function scores(){
+     	/* OBSTACLES */
+		var racines = getSliderValue('input-format0');
+		var cailloux =getSliderValue('input-format1');
+		var cabosse = getSliderValue('input-format2');
+		/* TOPOLOGIE */
+        var montees = getSliderValue('input-format3');
+		var descentes = getSliderValue('input-format4');
+		var plat = getSliderValue('input-format5');
+		/* PEUR DU VIDE */
+		var ponts = getSliderValue('input-format6');
+		var cretes = getSliderValue('input-format7');
+		var courante = getSliderValue('input-format8');
+		/* DUREE */
+		var uneH = getSliderValue('input-format9');
+		var deuxH = getSliderValue('input-format10');
+		var troisHplus = getSliderValue('input-format11');
+      
+      var score=[racines,cailloux,cabosse,montees,descentes,plat,
+                 ponts,cretes,courante,uneH,deuxH,troisHplus];
+      console.log(score);
+      return score;
+  }	
+
+  function dotproduct(a,b) {
+    var n = 0, lim = Math.min(a.length,b.length);
+    for (var i = 0; i < lim; i++) n += a[i] * b[i];
+    return n;
+  }
+
+  function norm2(a) {
+    var sumsqr = 0; 
+    for (var i = 0; i < a.length; i++) 
+      sumsqr += a[i]*a[i]; 
+    return Math.sqrt(sumsqr);
+  }
+
+  function similarity(a, b) {
+    return dotproduct(a,b)/norm2(a)/norm2(b);
+  }
+    
+  function getLevel(field) {
+    if (field==null)
+      return 0;
+    else
+      return _.max(field,"level").level / 10;
+  }
+    
+  function getPathMetadata() {
+    var names=[];
+    $.getJSON( "parcours.json", function( data ) {    
+      var paths=data.paths
+      $.each( paths, function( k,path ) {
+          names.push(": <a href='" + path.link + "'>"+path.name+"</a>" );
+      });
+    });
+    return names;
+  }    
+  var names=getPathMetadata();    
+              
+  function computePathVectors() {
+    var vectors = [];
+    $.getJSON( "parcours.json", function( data ) {
+        
+      var paths=data.paths
+      var i=0
+      $.each( paths, function( k,path ) {
+        var coso= _.groupBy(path.difficulty_points,'kind')
+        var dur1h=(path.duration<1.5)? 1 : 0;
+        var dur2h=(path.duration>=1.5 && path.duration<2.5)? 1 : 0;
+        var dur3h=(path.duration>=2.5)? 1 : 0;
+        var roots= getLevel(coso.roots);
+        var stone= getLevel(coso.stone);
+        var dirt = getLevel(coso.dirt);
+        var ups  = getLevel(coso.up);
+        var downs= getLevel(coso.down);
+        var flat =0;
+        var bridge= getLevel(coso.bridge);
+        var narrow= getLevel(coso.narrow);
+        var normal=0;
+        var pathScore=[roots,stone,dirt,ups,downs,flat,
+                      bridge,narrow,normal,dur1h,dur2h,dur3h];
+        vectors.push(pathScore);
+        var vertical= _.max(coso.vertical,"level")
+       
+      });
+    }); 
+    return vectors;
+  }   
+    
+  var pathVectors=computePathVectors();    
+    
+  function computeScores() {
+    var scoreUser=scores();
+    var txt="";
+	var tab = new Array();
+    console.log(pathVectors);
+    $.each( pathVectors, function( i,pathScore ) {
+		console.log(pathScore);
+        var distance=similarity(scoreUser,pathScore);
+		tab.push(Math.round(distance*100)/100 + " " + names[i]);
+		//txt=txt+names[i]+"::"+distance+"<br>";
+        //console.log("dist: "+distance)       
+    });
+	tab.sort();
+	for(var i = tab.length-1; i>=0; i--){
+		txt=txt+tab[i]+" <br>";
+		console.log(tab[i]);
 	}
-	
+    $("#paths").html(txt);
+    
+  }	
 </script>
 </body>
+
+

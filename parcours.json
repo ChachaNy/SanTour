@@ -2,7 +2,7 @@
   "data":"datos",
   "paths" : [
     { "name": "Les Arolles",
-      "duration": "2h45",
+      "duration": 2.75,
       "distance": 6.80,
       "image": "https://d25u9ndbhhiciz.cloudfront.net/points/59d4e978798c500bf04bbf29-1-m.jpg",
       "link": "https://www.snukr.com/exploration-details?id=59d4e9a6798c500bf04bbf2b&city=zinal&lang=fr",
@@ -19,11 +19,12 @@
         {"id": "5", "kind":"vertical","type":"Verticalité", "level": 7},
         {"id": "6", "kind":"vertical","type":"Verticalité", "level": 7},
         {"id": "7", "kind":"narrow","type":"Etroitesse", "level": 6},
-        {"id": "8", "kind":"stone","type":"stone", "level": 5}
+        {"id": "8", "kind":"stone","type":"stone", "level": 5},
+        {"id": "9", "kind":"roots","type":"stone", "level": 2}
       ]
     },
     { "name": "Les Clautis",
-      "duration": "1h",
+      "duration": 1,
       "distance": 3.55,
       "image": "https://d25u9ndbhhiciz.cloudfront.net/points/59d8a48b798c500bf04bbf54-1-m.jpg",
       "link": "https://www.snukr.com/exploration-details?id=59ce049e798c500bf04bbf09&city=zinal&lang=fr",
@@ -68,7 +69,7 @@
       ]
     },
     { "name": "Zinal-Petit Mountet Chemin d'hiver",
-      "duration": "3h30",
+      "duration": 3.5,
       "distance": 12.6,
      "image":"https://d25u9ndbhhiciz.cloudfront.net/points/59ce2d09798c500bf04bbf0d-1-m.jpg",
       "link": "https://www.snukr.com/exploration-details?id=59ce2d40798c500bf04bbf0e&city=zinal&lang=fr",
@@ -85,7 +86,7 @@
       ]
     },
     { "name": "Zinal-Petit Mountet chemin d'été",
-      "duration": "3h",
+      "duration": 3,
       "distance": 10.8,
       "image": "https://d25u9ndbhhiciz.cloudfront.net/points/59cdf84a798c500bf04bbefa-1-m.jpg",
       "link": "https://www.snukr.com/exploration-details?id=59ce50dd798c500bf04bbf10&city=zinal&lang=fr",
@@ -107,7 +108,7 @@
       ]
     },
     { "name": "La Lee",
-      "duration": "1h",
+      "duration": 1,
       "distance": 3.73,
       "image": "https://d25u9ndbhhiciz.cloudfront.net/points/59cdf84a798c500bf04bbefa-1-m.jpg",
       "link": "https://www.snukr.com/exploration-details?id=59d8b8a5798c500bf04bbf5d&city=zinal&lang=fr",
