@@ -4,7 +4,7 @@
     { "name": "Les Arolles",
       "duration": 2.75,
       "distance": 6.80,
-      "image": "https://d25u9ndbhhiciz.cloudfront.net/points/59d4e978798c500bf04bbf29-1-m.jpg",
+      "image": "https://d25u9ndbhhiciz.cloudfront.net/points/5a042fefa3f2ba0bf28eed52-1-m.jpg",
       "link": "https://www.snukr.com/exploration-details?id=59d4e9a6798c500bf04bbf2b&city=zinal&lang=fr",
       "height_diff_pos": 653,
       "height_diff_neg": 652,
@@ -18,10 +18,12 @@
         {"id": "4", "kind":"stone","type":"Pierre", "level": 4},
         {"id": "5", "kind":"vertical","type":"Verticalité", "level": 7},
         {"id": "6", "kind":"vertical","type":"Verticalité", "level": 7},
-        {"id": "7", "kind":"narrow","type":"Etroitesse", "level": 6},
-        {"id": "8", "kind":"stone","type":"stone", "level": 5},
+        {"id": "7", "kind":"narrow","type":"Etroitesse", "level": 4},
+        {"id": "8", "kind":"stone","type":"stone", "level": 7},
         {"id": "9", "kind":"roots","type":"stone", "level": 2},
-        {"id": "25", "kind":"up","type":"Montee", "level": 8}
+        {"id": "25", "kind":"dirt","type":"chemin de terre", "level": 7},
+        {"id": "25", "kind":"up","type":"Montee", "level": 9},
+        {"id": "25", "kind":"down","type":"Descente", "level": 8}
 
       ]
     },
@@ -52,22 +54,20 @@
         {"id": "14", "kind":"vertige","type":"Vertige", "level": 2},
         {"id": "15", "kind":"vertige","type":"Vertige", "level": 3},
         {"id": "16", "kind":"mousse","type":"Chemin de mousse", "level": 1},
-        {"id": "17", "kind":"roots","type":"Racines", "level": 7},
-        {"id": "18", "kind":"stone","type":"Cailloux", "level": 5},
+        {"id": "17", "kind":"roots","type":"Racines", "level": 8},
+        {"id": "18", "kind":"stone","type":"Cailloux", "level": 7},
         {"id": "19", "kind":"stone","type":"Cailloux", "level": 3},
         {"id": "20", "kind":"vertige","type":"Vertige", "level": 2},
         {"id": "21", "kind":"stone","type":"Cailloux", "level": 5},
         {"id": "22", "kind":"roots","type":"Racines", "level": 4},
-        {"id": "23", "kind":"vertige","type":"Vertige", "level": 2},
+        {"id": "23", "kind":"vertical","type":"Vertige", "level": 1},
         {"id": "24", "kind":"up","type":"Montee", "level": 3},
-        {"id": "25", "kind":"up","type":"Montee", "level": 6},
-        {"id": "26", "kind":"down","type":"Descente", "level": 4},
         {"id": "27", "kind":"bridge","type":"Pont", "level": 2},
         {"id": "28", "kind":"stone","type":"Cailloux", "level": 6},
         {"id": "29", "kind":"narrow","type":"Chemin étroit", "level": 2},
         {"id": "30", "kind":"obstacle","type":"Tourniquet", "level": 3},
         {"id": "31", "kind":"down","type":"Descente", "level": 1},
-        {"id": "32", "kind":"down","type":"Descente", "level": 1}
+        {"id": "32", "kind":"up","type":"Descente", "level": 1}
       ]
     },
     { "name": "Zinal-Petit Mountet Chemin d'hiver",
@@ -82,6 +82,8 @@
       "physical_codition": "Good",
       "difficulty_points": [
         {"id": "1", "kind":"vertical","type":"Verticalité", "level": 5},
+        {"id": "1", "kind":"up","type":"Verticalité", "level": 8},
+        {"id": "1", "kind":"down","type":"Verticalité", "level": 8},
         {"id": "2", "kind":"bridge","type":"Pont avec marches", "level": 2},
         {"id": "3", "kind":"dirt","type":"Route de terre", "level": 1},
         {"id": "4", "kind":"bridge","type":"Pont en planches", "level": 1}
@@ -90,7 +92,7 @@
     { "name": "Zinal-Petit Mountet chemin d'été",
       "duration": 3,
       "distance": 10.8,
-      "image": "https://d25u9ndbhhiciz.cloudfront.net/points/59cdf84a798c500bf04bbefa-1-m.jpg",
+      "image": "https://d25u9ndbhhiciz.cloudfront.net/points/59d4e978798c500bf04bbf29-1-m.jpg",
       "link": "https://www.snukr.com/exploration-details?id=59ce50dd798c500bf04bbf10&city=zinal&lang=fr",
       "height_diff_pos": 520,
       "height_diff_neg": 520,
@@ -99,6 +101,8 @@
       "physical_codition": "Good",
       "difficulty_points": [
         {"id": "1", "kind":"vertical","type":"Verticalité/passage technique (chaine)", "level": 8},
+        {"id": "1", "kind":"up","type":"Verticalité", "level": 8},
+        {"id": "1", "kind":"down","type":"Verticalité", "level": 8},
         {"id": "2", "kind":"roots","type":"Racines", "level": 3},
         {"id": "3", "kind":"stone","type":"Pierres", "level": 3},
         {"id": "4", "kind":"stone","type":"Pierres/pont rustique", "level": 3},
@@ -120,10 +124,12 @@
       "altitude_min": 1675,
       "physical_codition": "Weak",
       "difficulty_points": [
-        {"id": "1", "kind":"bridge","type":"Pont avec marches", "level": 4},
+        {"id": "1", "kind":"bridge","type":"Pont avec marches", "level": 7},
         {"id": "25", "kind":"vertical","type":"Montee", "level": 1},
+        {"id": "1", "kind":"up","type":"Verticalité", "level": 1},
+        {"id": "1", "kind":"down","type":"Verticalité", "level": 1},
         {"id": "2", "kind":"dirt","type":"Route de terre", "level": 1},
-        {"id": "9", "kind":"dirt","type":"Route de terre", "level": 6}
+        {"id": "9", "kind":"dirt","type":"Route de terre", "level": 7}
 
       ]
 

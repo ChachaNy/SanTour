@@ -1074,7 +1074,7 @@
     $.each( pathVectors, function( i,pathScore ) {
         console.log(pathScore);
         var distance=similarity(scoreUser,pathScore);
-        $("#pathTable").append('<tr><td><img height="50" src="'+metadata[i].image+'" class="circle"></td><td>'+metadata[i].name+'</td><td>'+metadata[i].distance+'km</td><td>'+metadata[i].duration+'h</td><td><a href="'+metadata[i].link+'">Snukr</a></td><td>score '+distance.toFixed(2)+'</td> </tr>');
+        $("#pathTable").append('<tr><td><img height="50" src="'+metadata[i].image+'" class="circle"></td><td>'+metadata[i].name+'</td><td>'+metadata[i].distance+'km</td><td>'+metadata[i].duration+'h</td><td><a href="'+metadata[i].link+'" target="_blank">Snukr</a></td><td>score '+distance.toFixed(2)+'</td> </tr>');
         //console.log("dist: "+distance)       
     });
     //$("#pathTable").html(txt);
