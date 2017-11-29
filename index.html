@@ -1111,7 +1111,13 @@
       return ' <i class="material-icons orange600 tiny tooltipped" data-position="bottom" data-delay="50" data-tooltip="'+txt+'">warning</i>';
     }
   }
-        
+    
+  function scoreColor(score){
+    if (score<0.5) return "red";
+    if (score<0.74 && score>=0.5) return "orange";
+    if (score>=0.74) return "green";
+  }
+    
   function computeScores() {
     //healthScores=[paPlot, walkHelpPlot, walkSpeedPlot, walkTimePlot, climbPlot, securePlot, voidsPlot, equilibrePlot, painPlot, mobilityPlot];
 
@@ -1130,7 +1136,7 @@
               '<td>'+metadata[i].distance+'km</td>'+
               '<td>'+metadata[i].duration+'h</td>'+
               '<td><a href="'+metadata[i].link+'">Snukr</a></td>'+
-              '<td>score '+distance.toFixed(2)+'</td> </tr>';
+              '<td><span class="new badge '+scoreColor(distance)+'" data-badge-caption="score">'+distance.toFixed(2)+'</span></td> </tr>';
 		map.set(distance, txt);  
     });
     //$("#pathTable").html(txt);
