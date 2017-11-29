@@ -519,7 +519,7 @@
 		<div class="col l6 m6 s12" >
 			
 			<div class="target" style="overflow-y: scroll; height: 100%;"> 
-				<div class="row z-depth-3" >
+				<div class="row z-depth-3 white" >
 					<div class="col m6 s12">
 						<div id="radarID"></div>
 					</div>
@@ -552,7 +552,7 @@
                               
                             </table>
                             <p id="paths"></p>
-							<button class="waves-effect waves-light btn" onclick="computeScores()">Recommandation</button>
+							<button class="waves-effect waves-light light-blue darken-3 btn" onclick="computeScores()" >Recommandation</button>
 						</div>
 					</div>
                     
@@ -566,7 +566,7 @@
 	</div> <!-- Enf of row -->
 		
 	<!-- FOOTER -->
-	 <footer class="page-footer cyan darken-3">
+	 <footer class="page-footer light-blue darken-3">
 		<div class="footer-copyright">
 			© HES-SO Valais-Wallis. All rights reserved.
 		</div>
@@ -575,6 +575,10 @@
 
 <script>
 
+	$(window).resize(function() {
+		redraw(false);
+	});
+	
 	function checkPain(checkbox){
 		if(checkbox.checked){
 			$('#r6_6').prop('checked', false);
@@ -645,7 +649,7 @@
         redraw(false);
     })
 	
-	redraw(true);
+	redraw(false);
 
     $('input[name=ap1]').change(function () {
         if ($(this).val() == 1) {
@@ -939,9 +943,9 @@
 				tickInterval: 30,
 				min: 0,
 				max: 360,
+				visible:true,
 				labels: {
 					formatter: function () {
-									
 						var lab = ['racines', 'cailloux', 'cabossé', 'montées', 'descentes', 'plat', 'ponts', 'crètes', 'main courante', '1h', '2h', '3h+'];
 						i++;
 						return lab[i-1];					
@@ -1069,6 +1073,7 @@
   var pathVectors=computePathVectors();    
     
   function computeScores() {
+	addLogEvent("Description de l'événement");
     var scoreUser=scores();
     var txt="";
 	var map = new Map();
@@ -1077,7 +1082,7 @@
     $.each( pathVectors, function( i,pathScore ) {
         console.log(pathScore);
         var distance=similarity(scoreUser,pathScore);
-		txt = '<tr><td><img height="50" src="'+metadata[i].image+'" class="circle"></td><td>'+metadata[i].name+'</td><td>'+metadata[i].distance+'km</td><td>'+metadata[i].duration+'h</td><td><a href="'+metadata[i].link+'">Snukr</a></td><td>score '+distance.toFixed(2)+'</td> </tr>';
+		txt = '<tr><td><img height="50" src="'+metadata[i].image+'" class="circle"></td><td>'+metadata[i].name+'</td><td>'+metadata[i].distance+'km</td><td>'+metadata[i].duration+'h</td><td><a href="'+metadata[i].link+'" target="_blank">Snukr</a></td><td>score '+distance.toFixed(2)+'</td> </tr>';
 		map.set(distance, txt);  
     });
     //$("#pathTable").html(txt);
