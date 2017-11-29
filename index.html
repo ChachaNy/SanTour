@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/materialize.css">
 	<link rel="stylesheet" href="css/custom.css">
 	<link rel="stylesheet" href="cssFiles/nouislider.min.css">
-	
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src="https://code.highcharts.com/highcharts.js"></script>
 	<script src="https://code.highcharts.com/highcharts-more.js"></script>
@@ -575,6 +575,14 @@
 
 <script>
 
+    function tooltipping() {
+      $('.tooltipped').tooltip({delay: 50,html: true});
+      //  $('.tooltipped').tooltip({delay: 50, tooltip:"new",position:"right"});
+//var element = $('.tooltipped');
+//element.attr('data-tooltip', 'new tooltip');
+//element.tooltip();
+    };
+    
 	function checkPain(checkbox){
 		if(checkbox.checked){
 			$('#r6_6').prop('checked', false);
@@ -677,6 +685,8 @@
             $('#sec_ap5').show();
         }
     });
+    
+    var healthScores=[];
 
     function redraw(bStart) {
 
@@ -902,6 +912,8 @@
             }]
         });
 		
+        healthScores=[paPlot, walkHelpPlot, walkSpeedPlot, walkTimePlot, climbPlot, securePlot, voidsPlot, equilibrePlot, painPlot, mobilityPlot];
+        
 		/* OBSTACLES */
 		var racines = parseInt(document.getElementById('input-format0').value);
 		var cailloux = parseInt(document.getElementById('input-format1').value);
@@ -1068,20 +1080,60 @@
     
   var pathVectors=computePathVectors();    
     
+  function textRecommendation () {
+    var recMap = new Map();
+    recMap.set("knees","Difficile pour douleurs aux genoux");
+    recMap.set("physical","Bon état physique recommandé");
+    recMap.set("stick","Attention si besoin de canne ou aide à la marche");
+    recMap.set("pain","Attention si douleurs imoprtants");
+    recMap.set("climb","Des montées importantes");
+    recMap.set("void","Attention si peur du vide");
+    return recMap;
+  }    
+
+  function computeTextRecommendations(warnings) {
+      console.log("topopo "+warnings);
+    var recMap=textRecommendation();
+    var txt="";
+    if (healthScores[0]<50 && warnings.includes("physical")){
+        txt=txt+recMap.get("physical")+"<br>";}
+    if (healthScores[1]<40 && warnings.includes("stick")){
+        txt=txt+recMap.get("stick")+"<br>";}
+    if (healthScores[4]<50 && warnings.includes("climb")){
+        txt=txt+recMap.get("climb")+"<br>";}
+    if (healthScores[6]<50 && warnings.includes("void")){
+        txt=txt+recMap.get("void")+"<br>";}
+    if (healthScores[8]<60 && warnings.includes("pain")){
+        txt=txt+recMap.get("pain")+"<br>";}
+    if (txt.length==0){
+      return txt;}
+    else {
+      return ' <i class="material-icons orange600 tiny tooltipped" data-position="bottom" data-delay="50" data-tooltip="'+txt+'">warning</i>';
+    }
+  }
+        
   function computeScores() {
+    //healthScores=[paPlot, walkHelpPlot, walkSpeedPlot, walkTimePlot, climbPlot, securePlot, voidsPlot, equilibrePlot, painPlot, mobilityPlot];
+
     var scoreUser=scores();
     var txt="";
 	var map = new Map();
     console.log(pathVectors);
-    $("#pathTable").html('<thead><th></th><th>Parcours</th><th>distance</th><th>temps</th><th>lien</th><th>score</th></thead>');
+    $("#pathTable").html(
+        '<thead>'+
+        '<th></th><th>parcours</th><th>distance</th><th>temps</th><th>lien</th><th>score</th></thead>');
     $.each( pathVectors, function( i,pathScore ) {
         console.log(pathScore);
         var distance=similarity(scoreUser,pathScore);
-		txt = '<tr><td><img height="50" src="'+metadata[i].image+'" class="circle"></td><td>'+metadata[i].name+'</td><td>'+metadata[i].distance+'km</td><td>'+metadata[i].duration+'h</td><td><a href="'+metadata[i].link+'">Snukr</a></td><td>score '+distance.toFixed(2)+'</td> </tr>';
+		txt = '<tr><td><img height="50" src="'+metadata[i].image+'" class="circle"></td>'+
+              '<td>'+metadata[i].name+computeTextRecommendations(metadata[i].warnings)+'</td>'+
+              '<td>'+metadata[i].distance+'km</td>'+
+              '<td>'+metadata[i].duration+'h</td>'+
+              '<td><a href="'+metadata[i].link+'">Snukr</a></td>'+
+              '<td>score '+distance.toFixed(2)+'</td> </tr>';
 		map.set(distance, txt);  
     });
     //$("#pathTable").html(txt);
-    
 	let keys = Array.from(map.keys() );
 	
 	keys.sort();
@@ -1089,6 +1141,8 @@
 	for(i=keys.length-1; i>=0; i--){
 		$("#pathTable").append(map.get(keys[i]));
 	}
+    tooltipping();
+
   }	
 </script>
 </body>
