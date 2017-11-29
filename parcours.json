@@ -11,6 +11,9 @@
       "altitude_max": 2289,
       "altitude_min": 1669,
       "physical_codition": "Good",
+      "warnings": [
+        "pain","physical","stick"  
+      ],
       "difficulty_points": [
         {"id": "1", "kind":"vertical", "type":"Verticalité", "level": 8},
         {"id": "2", "kind":"stone","type":"Pierre", "level": 2},
@@ -37,14 +40,16 @@
       "altitude_max": 1720,
       "altitude_min": 1675,
       "physical_codition": "Average",
-      "difficulty_points": [
+      "warnings": [
+          
+      ],      "difficulty_points": [
         {"id": "1", "kind":"dirt","type":"Route terre", "level": 1},
         {"id": "2", "kind":"obstacle","type":"Tourniquet", "level": 4},
-        {"id": "3", "kind":"up","type":"Montée", "level": 3},
-        {"id": "4", "kind":"dirt","type":"Chemin de terre", "level": 4},
+        {"id": "3", "kind":"up","type":"Montée", "level": 1},
+        {"id": "4", "kind":"dirt","type":"Chemin de terre", "level": 1},
         {"id": "5", "kind":"roots","type":"Racines", "level": 3},
         {"id": "6", "kind":"stone","type":"Cailloux", "level": 3},
-        {"id": "7", "kind":"dirt","type":"Chemin de terre", "level": 6},
+        {"id": "7", "kind":"dirt","type":"Chemin de terre", "level": 1},
         {"id": "8", "kind":"mousse","type":"Chemin de mousse", "level": 2},
         {"id": "9", "kind":"steps","type":"Marches", "level": 2},
         {"id": "10", "kind":"narrow","type":"Chemin étroit", "level": 3},
@@ -61,7 +66,7 @@
         {"id": "21", "kind":"stone","type":"Cailloux", "level": 5},
         {"id": "22", "kind":"roots","type":"Racines", "level": 4},
         {"id": "23", "kind":"vertical","type":"Vertige", "level": 1},
-        {"id": "24", "kind":"up","type":"Montee", "level": 3},
+        {"id": "24", "kind":"up","type":"Montee", "level": 2},
         {"id": "27", "kind":"bridge","type":"Pont", "level": 2},
         {"id": "28", "kind":"stone","type":"Cailloux", "level": 6},
         {"id": "29", "kind":"narrow","type":"Chemin étroit", "level": 2},
@@ -80,6 +85,9 @@
       "altitude_max": 2142,
       "altitude_min": 1670,
       "physical_codition": "Good",
+      "warnings": [
+        "physical","climb"  
+      ],
       "difficulty_points": [
         {"id": "1", "kind":"vertical","type":"Verticalité", "level": 5},
         {"id": "1", "kind":"up","type":"Verticalité", "level": 8},
@@ -99,6 +107,9 @@
       "altitude_max": 2142,
       "altitude_min": 1670,
       "physical_codition": "Good",
+      "warnings": [
+        "climb","physical","balance","pain"
+      ],
       "difficulty_points": [
         {"id": "1", "kind":"vertical","type":"Verticalité/passage technique (chaine)", "level": 8},
         {"id": "1", "kind":"up","type":"Verticalité", "level": 8},
@@ -123,6 +134,9 @@
       "altitude_max": 1675,
       "altitude_min": 1675,
       "physical_codition": "Weak",
+      "warnings": [
+        "pain","stick"  
+      ],
       "difficulty_points": [
         {"id": "1", "kind":"bridge","type":"Pont avec marches", "level": 7},
         {"id": "25", "kind":"vertical","type":"Montee", "level": 1},
