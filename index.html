@@ -551,7 +551,7 @@
                              
                               
                             </table>
-                            <p id="paths"></p>
+                            
 							<button class="waves-effect waves-light light-blue darken-3 btn" onclick="computeScores()">Recommandation</button>
 						</div>
 					</div>
@@ -1131,11 +1131,11 @@
     console.log(pathVectors);
     $("#pathTable").html(
         '<thead>'+
-        '<th></th><th>parcours</th><th>distance</th><th>temps</th><th>lien</th><th>score</th></thead>');
+        '<th class="hide-on-small-only"></th><th>parcours</th><th>distance</th><th>temps</th><th>lien</th><th>score</th></thead>');
     $.each( pathVectors, function( i,pathScore ) {
         console.log(pathScore);
         var distance=similarity(scoreUser,pathScore);
-		txt = '<tr><td><img height="50" src="'+metadata[i].image+'" class="circle"></td>'+
+		txt = '<tr><td class="hide-on-small-only"><img height="50" src="'+metadata[i].image+'" class="circle"></td>'+
               '<td>'+metadata[i].name+computeTextRecommendations(metadata[i].warnings)+'</td>'+
               '<td>'+metadata[i].distance+'km</td>'+
               '<td>'+metadata[i].duration+'h</td>'+
