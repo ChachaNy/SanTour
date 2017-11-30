@@ -71,8 +71,8 @@
         {"id": "28", "kind":"stone","type":"Cailloux", "level": 6},
         {"id": "29", "kind":"narrow","type":"Chemin étroit", "level": 2},
         {"id": "30", "kind":"obstacle","type":"Tourniquet", "level": 3},
-        {"id": "31", "kind":"down","type":"Descente", "level": 1},
-        {"id": "32", "kind":"up","type":"Descente", "level": 1}
+        {"id": "31", "kind":"down","type":"Descente", "level": 3},
+        {"id": "32", "kind":"up","type":"Descente", "level": 3}
       ]
     },
     { "name": "Zinal-Petit Mountet Chemin d'hiver",
@@ -143,6 +143,11 @@
         {"id": "1", "kind":"up","type":"Verticalité", "level": 1},
         {"id": "1", "kind":"down","type":"Verticalité", "level": 1},
         {"id": "2", "kind":"dirt","type":"Route de terre", "level": 1},
+    {"id": "6", "kind":"stone","type":"Cailloux", "level": 3},
+        {"id": "7", "kind":"dirt","type":"Chemin de terre", "level": 4},
+        {"id": "8", "kind":"mousse","type":"Chemin de mousse", "level": 2},
+        {"id": "9", "kind":"steps","type":"Marches", "level": 2},
+        {"id": "10", "kind":"narrow","type":"Chemin étroit", "level": 3},
         {"id": "9", "kind":"dirt","type":"Route de terre", "level": 7}
 
       ]
