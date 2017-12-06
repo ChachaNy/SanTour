@@ -552,7 +552,7 @@
                               
                             </table>
                             
-							<button class="waves-effect waves-light light-blue darken-3 btn" onclick="computeScores()">Recommandation</button>
+							<button class="waves-effect waves-light light-blue darken-3 btn" onclick="computeScores()" type="submit">Recommandation</button>
 						</div>
 					</div>
                     
@@ -572,6 +572,16 @@
 		</div>
 	 </footer>
 
+<?php
+
+	write_log("test");
+	
+	function write_log($msg){
+		$logfile = 'log_' . date('d-M-Y') . '.log';
+		
+		file_put_contents($logfile, $msg . "\n", FILE_APPEND);
+	}
+?>
 
 <script>
 
@@ -1139,7 +1149,7 @@
               '<td>'+metadata[i].name+computeTextRecommendations(metadata[i].warnings)+'</td>'+
               '<td>'+metadata[i].distance+'km</td>'+
               '<td>'+metadata[i].duration+'h</td>'+
-              '<td><a href="'+metadata[i].link+'">Snukr</a></td>'+
+              '<td><a href="'+metadata[i].link+'" target="_blank">Snukr</a></td>'+
               '<td><span class="new badge '+scoreColor(distance)+'" data-badge-caption="score">'+distance.toFixed(2)+'</span></td> </tr>';
 		map.set(distance, txt);  
     });
